@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.Dao.ArticleDao">
+
+    <insert id="addArticle" keyProperty="id" parameterType="Article" useGeneratedKeys="true">
+        insert into article value (null,#{title},#{content},#{commentNumber},#{pointsNumber}
+        ,#{browseNumber},#{createtime},#{topStatus},#{hotStatus},#{status},#{uid},#{cid})
+    </insert>
+
+    <sql id="formTable">
+       select * form ${table_name}
+    </sql>
+
+    <resultMap id="selectPageResultMap" type="article">
+
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="commentNumber" column="commentNumber"/>
+        <result property="pointsNumber" column="pointsNumber"/>
+        <result property="browseNumber" column="browseNumber"/>
+        <result property="createtime" column="createtime"/>
+        <result property="status" column="status"/>
+        <result property="topStatus" column="topStatus"/>
+        <result property="hotStatus" column="hotStatus"/>
+        <result property="uid" column="uid"/>
+        <result property="cid" column="cid"/>
+
+        <association property="category" javaType="category">
+
+            <result property="name" column="name"/>
+            <result property="visitCount" column="visitCount"/>
+            <result property="postingCount" column="postingCount"/>
+
+        </association>
+
+        <association property="user" javaType="User">
+
+            <result property="username" column="username"/>
+            <result property="age" column="age"/>
+            <result property="username" column="username"/>
+            <result property="headerImg" column="headerImg"/>
+            <result property="desc" column="desc"/>
+            <result property="phone" column="phone"/>
+            <result property="articleCount" column="articleCount"/>
+            <result property="jointime" column="jointime"/>
+
+        </association>
+
+    </resultMap>
+
+    <select id="selectArticleByUid" resultMap="selectPageResultMap">
+        select * from article a,`user` u where u.id = #{uid} and a.uid = u.id and status = 1
+    </select>
+
+    <select id="selectByCategoryId" resultMap="selectPageResultMap" >
+        select * from article a,category c,`user` u where cid = #{id} and u.id = uid and status = 1
+    </select>
+
+    <select id="selectArticleById" resultMap="selectPageResultMap">
+        <!--<include refid="formTable">-->
+            <!--<property name="table_name" value="article"/>-->
+        <!--</include>-->
+        select * from article a,category c where uid = #{id} and cid = c.id and status = 1 limit #{start},5
+
+    </select>
+
+    <select id="selectArticleByTitle" resultMap="selectPageResultMap">
+        select * from article a,category c where uid = #{id} and cid = c.id and status = 1 and title like "%${name}%" order by id
+    </select>
+
+    <select id="selectAllByPage" resultMap="selectPageResultMap">
+        select * from article a,category c,`user` u where cid = c.id and u.id = uid and status = 1 limit #{start},5
+    </select>
+
+    <select id="selectAllByTitle" resultMap="selectPageResultMap">
+        select * from article a,category c,`user` u where cid = c.id and u.id = uid and status = 1 and title like "%${title}%" order by a.id
+    </select>
+
+    <select id="selectAllByTitleNav" resultMap="selectPageResultMap">
+        select a.id as id,a.title,a.content,a.commentNumber, a.pointsNumber,a.browseNumber,a.createtime,a.topStatus,
+        a.hotStatus,a.`status`,a.uid,a.cid,c.`name`,u.username,u.headerImg,u.articleCount
+        from article a,category c,`user` u where cid = c.id and u.id = uid and status = 1 and a.title like "%${title}%" order by a.id
+    </select>
+
+    <select id="selectAll" resultMap="selectPageResultMap">
+        select * from article a,user u where status = 1 and a.uid = u.id;
+    </select>
+
+    <select id="selectNewArticle" resultMap="selectPageResultMap">
+        select * from article a,user u where status = 1 and a.uid = u.id order by createtime desc LIMIT #{start},5
+    </select>
+
+    <select id="getArticleDetails" resultMap="selectPageResultMap">
+        select * from article a,category c,`user` u where cid = c.id and u.id = a.uid and a.status = 1 and a.id = #{aid}
+    </select>
+
+    <select id="adminArticleDetails" resultMap="selectPageResultMap">
+         select * from article a,category c,`user` u where cid = c.id and u.id = a.uid and a.id = #{aid}
+    </select>
+
+</mapper>

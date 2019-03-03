@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="container_left" th:fragment="left (item)" class="container-left pull-left">
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li th:class="${item == 'mymain' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/admin/"><img src="/Image/backImg/主页.png" alt="">我的主页</a>
+            </li>
+            <li th:class="${item == 'user_make' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/admin/user_make"><img src="/Image/backImg/用户.png" alt="">用户管理</a>
+            </li>
+            <li th:class="${item == 'article_make' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/admin/article_make"><img src="/Image/backImg/文章.png" alt="">文章管理</a>
+            </li>
+            <li th:class="${item == 'comment_make' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/admin/comment_make"><img src="/Image/backImg/评 论.png" alt="">评论管理</a>
+            </li>
+            <li th:class="${item == 'audit_make' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/admin/audit_article"><img src="/Image/backImg/审核.png" alt="">审核处理</a>
+            </li>
+            <li th:class="${item == 'hot' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/admin/hot_recommend"><img src="/Image/backImg/热门.png" alt="">热门推荐</a>
+            </li>
+            <li th:class="${item == 'top' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/admin/top_recommend"><img src="/Image/backImg/置顶.png" alt=""><span>置顶管理</span>
+                </a>
+            </li>
+            <li th:class="${item == 'notic' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/admin/notic"><img src="/Image/backImg/公告.png" alt="">系统公告</a>
+            </li>
+            <li th:class="${item == 'sum' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/admin/sum"><img src="/Image/backImg/统计.png" alt="">网站统计</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

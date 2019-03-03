@@ -1,0 +1,58 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #f2f2f2;
+}
+.content-left{
+    min-height: 600px;
+    background-color: #ffff;
+}
+.list-article li{
+    margin-bottom: 5px;
+    border-bottom: 1px solid #f2f2f2;
+    clear: both;
+}
+.list-article .img-head{
+    width: 50px;
+    height: 50px;
+}
+.content-left .search-title{
+    font-size: 17px;
+    font-weight: bold;
+}
+.list-article .article-title{
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0 0 0 10px;
+    overflow: hidden;
+}
+
+.list-article .article-title:hover{
+    color: #52c3dd;
+}
+
+.list-article .article-info{
+    cursor: pointer;
+    padding-left: 10px;
+    overflow: hidden;
+}
+.content-right{
+    padding: 5px;
+    background-color: #ffff;
+}
+.content-right p{
+    margin-top: 10PX;
+}
+.content-right .right-img-head{
+    width: 30%;height: 30%;
+    border-radius: 50%;
+    margin-top: 20PX;
+}
+.content-right .layui-field-box{
+    padding:0px 15px 10px 15px;
+}
+.layui-elem-field legend{
+    font-size: 14px;
+}

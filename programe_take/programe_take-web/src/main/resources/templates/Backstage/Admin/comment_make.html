@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>admin管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/css/Backstage/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/Backstage/common.css}">
+
+
+</head>
+
+<body>
+<!-- nav 导航栏 -->
+<!-- 导航栏 -->
+
+<div th:replace="nav/backstagenav :: backstagenav"></div>
+
+
+<div class="container">
+    <div class="container-left pull-left">
+        <div th:replace="/nav/container_left :: left(item='comment_make')"></div>
+    </div>
+    <div class="container-right pull-left">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">评论管理&nbsp;<i class="layui-icon"></i></li>
+            </ul>
+            <div class="layui-tab-content page_two">
+                <!-- page 4 评论管理-->
+                <div class="layui-tab-item layui-show">
+
+                    <div class="content">
+
+                        <div class="layui-btn-group pull-right">
+                            <button onclick="deleteComment()" class="layui-btn layui-btn-radius layui-btn-normal">删除
+                            </button>
+                        </div>
+
+                        <table class="layui-table" lay-size="sm">
+                            <thead>
+                            <tr class="text-center">
+                                <th>id</th>
+                                <th>文章标题</th>
+                                <th>A用户</th>
+                                <th>内容</th>
+                                <th>B用户</th>
+                                <th>内容</th>
+                                <th>时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="commentAllTbody">
+
+                            </tbody>
+                        </table>
+
+                        <div class="pageGroup">
+                            <div class="page-info">
+                                <span id="commentAllCurrentPage"></span>
+                                <span id="commentAllCountPage"></span>
+                                <span id="commentAllPageSize"></span>
+                            </div>
+                            <div id="CommentAllBtnGroup" class="layui-btn-group pull-right">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--评论 form-->
+<form action="" hidden="hidden" id="myCommentForm">
+    <input type="text" name="pageSize" value="5"/>
+    <input type="text" name="currentPage" value="1"/>
+    <input type="text" name="countPage" value="0">
+</form>
+
+<script>
+    window.onload = function () {
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use('element', function () {
+            var element = layui.element;
+        });
+    };
+
+    function dateConvert(date) {
+        return date.match(/(\d+-\d+-\d+)/)[0];
+    }
+
+    async function getUserName(uid) {
+
+        let userName = await new Promise(((resolve, reject) => {
+
+            fetch(`/user/${uid}`
+                , {
+                    method: "get"
+                }).then((response) => {
+                response.json().then((data) => {
+                    // console.log(data);
+                    resolve(data["username"]);
+                });
+            });
+        }));
+
+        return userName;
+    }
+
+    async function getArticleTitle(aid){
+
+        let title = await new Promise(((resolve, reject) => {
+
+            fetch(`/article/${aid}`
+                , {
+                    method: "get"
+                }).then((response) => {
+                response.json().then((data) => {
+                    // console.log(data);
+                    resolve(data["title"]);
+                });
+            });
+        }));
+
+        return title;
+    }
+
+    //文章的评论数减一
+    function updateCommentNumber(aid) {
+
+        fetch("/article/commentNumber/reduce/"+aid
+            , {
+
+                method: "get"
+
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+            });
+        });
+
+    }
+
+    // 删除评论 多删
+    function deleteComment() {
+
+        let checkArr = Array.prototype.slice.call(document.querySelectorAll("input[type=checkbox]"));
+
+        let delArr = [];
+        let aid = [];
+
+        for (let item of checkArr) {
+
+            if (item.checked) {
+                delArr.push(item.value);
+                aid.push(item.dataset.aid);
+            }
+        }
+
+        if (delArr.length) {
+
+            layer.confirm('确定要删除选中的评论吗？', {
+                icon: 3,
+                btn: ['取消', '确定'] //按钮
+            }, function () {
+
+                layer.msg('已取消!', {
+                    time: 1000
+                });
+            }, function () {
+
+                fetch("/comment/del?delArr=" + delArr, {
+                    method: "delete"
+                }).then((response) => {
+
+                    response.json().then((data) => {
+
+                        console.log(data);
+
+                        if (data.flage) {
+
+                            aid.forEach((value,index)=>{
+                                // 文章对应的评论减少
+                                updateCommentNumber(value);
+
+                            });
+
+                            layer.msg('删除成功!', {icon: 1, time: 2000});
+                        } else {
+                            layer.msg('删除失败!', {icon: 2, time: 2000});
+                        }
+
+                        commentAll();
+                    });
+
+                });
+            })
+        }
+    }
+    //删除评论 单
+    function delComment(id,repeatid,aid) {
+
+        layer.confirm('确定要删除该评论吗？', {
+            icon: 3,
+            btn: ['取消', '确定'] //按钮
+        }, function () {
+
+            layer.msg('已取消!', {
+                time: 1000
+            });
+        }, function () {
+
+            fetch("/comment/del?delArr=" + [id], {
+
+                method: "delete",
+
+            }).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+
+                    if (data.flage) {
+
+                        //文章评论数减一
+                        updateCommentNumber(aid);
+
+                        layer.msg('删除成功!', {icon: 1, time: 2000});
+                    } else {
+                        layer.msg('删除失败!', {icon: 2, time: 2000});
+                    }
+
+                    commentAll();
+                });
+
+            });
+        });
+
+    }
+
+    commentAll();
+    function commentAll() {
+
+        fetch("/admin/comments?currentPage="
+            + myCommentForm["currentPage"].value + "&pageSize=" + myCommentForm["pageSize"].value
+            , {
+                method: "get"
+            }).then((response) => {
+
+            response.json().then(async (data) => {
+
+                console.log(data);
+
+                let template = "";
+
+                commentAllCurrentPage.innerHTML = "当前第" + data["currentPage"] + "页";
+                commentAllCountPage.innerHTML = "共" + data["countPage"] + "页";
+                commentAllPageSize.innerHTML = "每页" + data["pageSize"] + "条";
+
+                for (let item of data["list"]) {
+
+                    let time = dateConvert(item["time"]);
+                    let repeatId = (item["repeatId"] == null ? null : item["repeatId"]);
+                    let repeatContent = null;
+
+                    let acontent = (item["acontent"] == null ? "无" : item["acontent"]);
+
+                    if (repeatId) {
+
+                        // 拿到repeatid 查询回复的内容
+                        await new Promise(((resolve, reject) => {
+
+                            fetch("/user/repeat/content?id=" + repeatId
+                                , {
+                                    method: "get"
+                                }).then((response) => {
+
+                                response.text().then((data) => {
+
+                                    repeatContent = data;
+
+                                    console.log("repeatContent:" + data);
+
+                                    resolve();
+
+                                });
+                            });
+                        }));
+
+                    } else {
+                        repeatContent = "暂无";
+                    }
+                    let ausername = null;
+                    let busername = null;
+                    let title = null;
+                    // 得到用户名
+                    ausername = await getUserName(item["uaid"]).then((name)=>{
+                        return name;
+                    });
+
+                    busername = await getUserName(item["ubid"]).then((name)=>{
+                        return name;
+                    });
+                    // 得到标题
+                    title = await getArticleTitle(item["aid"]).then((title)=>{
+                        return title;
+                    });
+
+                    let temp = ` <tr class="text-center">
+                                    <td><input data-aid="${item["aid"]}" type="checkbox" name="ids" value="${item['id']}"></td>
+                                    <td>${title}</td>
+                                    <td>${ausername}</td>
+                                    <td>${acontent}</td>
+                                    <td>${busername}</td>
+                                    <td>${repeatContent}</td>
+                                    <td>${time}</td>
+                                    <td>
+                                        <p style="text-align: center;">
+                                            <a onclick="delComment(${item["id"]},${item["repeatId"]},${item["aid"]})">
+                                                <img src="/Image/删除.png" width="30px" alt="">
+                                            </a>
+                                        </p>
+                                        <p style="text-align: center;">
+                                            <span>删除评论</span>
+                                        </p>
+                                    </td>
+                                </tr>`;
+                    template += temp;
+                }
+
+                commentAllTbody.innerHTML = template;
+
+                navbar("myCommentForm", CommentAllBtnGroup, data["currentPage"],
+                    data["countPage"], data["pageSize"], "commentAll");
+            });
+        });
+    }
+
+    // 前一页
+    function afterBtn(form, fun) {
+
+        let currentPage = form["currentPage"].value;
+
+        if (currentPage == 1) return;
+
+        form["currentPage"].value = (currentPage - '0') - 1;
+
+        fun();
+
+    }
+
+    //后一页
+    function beforeBtn(form, fun) {
+
+        let currentPage = form["currentPage"].value;
+
+        if (currentPage == form["countPage"].value) return;
+
+        form["currentPage"].value = (currentPage - '0') + 1;
+
+        fun();
+    }
+
+    //              表单      按钮组   当前页     总页数   每页的大小  请求数据的接口函数
+    function navbar(form, element, currentPage, countPage, pageSize, fun) {
+        //form总页数
+        form["countPage"] = countPage;
+
+        let left = `<button class="layui-btn" onclick="afterBtn(${form},${fun})">
+                                  <i class="layui-icon layui-icon-left"></i>
+                            </button>`;
+
+        let right = `<button class="layui-btn" onclick="beforeBtn(${form},${fun})">
+                                  <i class="layui-icon layui-icon-right"></i>
+                             </button>`;
+
+        let offset = ~~(pageSize / 2);
+
+        let start = currentPage - offset < 1 ? 1 : currentPage - offset;
+
+        let end = currentPage + offset > countPage ? countPage : currentPage + offset;
+
+        let endoffset = countPage - pageSize - 1;
+
+        end = end < pageSize ? pageSize : end;
+
+        start = start > Math.abs(endoffset) ? Math.abs(endoffset) : start;
+
+        let template = left;
+
+        for (let i = start; i <= end; i++) {
+
+            let temp = `<button onclick="changeValue(${form},${i},${fun})" data-index="${i}" class="layui-btn">${i}</button>`;
+
+            template += temp;
+        }
+
+        template += right;
+
+        element.innerHTML = template;
+    }
+
+    // 改变form分页的值
+    function changeValue(element, currentPage, fun) {
+
+        element["currentPage"].value = currentPage;
+        element["pageSize"].value = 5;
+        fun();
+    }
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+
+#box {
+    width: 500px;
+    height: 570px;
+    margin: 100px auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 2%;
+}
+#page > .registerPage{
+    text-align: center;
+    z-index: 2;
+}
+.radio-item_margin{
+    margin: 0;
+}
+.btn-w{
+    width: 25%;
+}

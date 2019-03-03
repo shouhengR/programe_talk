@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>文章详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/article_details.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+
+    <script defer th:src="@{/js/common.js}"></script>
+</head>
+
+<body>
+<!-- 导航栏 -->
+<div th:replace="~{/nav/main_nav :: main_nav (current='index')}"></div>
+<!-- 整个内容区 -->
+<div class="layui-container" style="width:1200px;">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md8">
+            <!-- 左部 -->
+            <div class="content-left">
+                <!-- 文章标题 -->
+                <header class="article-title text-center">
+                    <h2 id="title" th:text="${article.title}" class="title">关于转生成为史莱姆的事情。</h2>
+                    <p class="title-details">
+                        <span id="createTime" th:text="${#dates.format(article.createtime, 'yyyy年/MMM/dd')}"
+                              class="time"></span>&nbsp;&nbsp;
+                        <span id="commentNumber" class="commint">评论数:[[${article.commentNumber}]]</span>&nbsp;&nbsp;
+                        <span id="browseNumber" class="look">浏览量:[[${article.browseNumber}]]</span>&nbsp;&nbsp;
+                        <span id="category" class="type">分类:[[${article.category.name}]]</span>
+                    </p>
+                    <hr>
+                </header>
+                <!-- 文章身体 -->
+                <article class="article-body">
+                    <div style="min-height: 550px;" th:utext="${article.content}" id="articleContent"></div>
+
+                    <div class="point text-center">
+                        <i id="point" th:onclick="'Up('+${article.id}+')'"
+                           class="point-style layui-icon layui-icon-praise"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <i onclick="down(this)" class="point-style layui-icon layui-icon-tread"></i>
+                        <p>顶一下&nbsp;&nbsp;&nbsp;踩一下</p>
+                    </div>
+                </article>
+                <!-- 评论区 -->
+                <div class="article-commint">
+                    <div class="form-writer">
+                        <form class="layui-form layui-form-pane" id="commentForm">
+                            <div class="layui-form-item layui-form-text margin-none">
+                                <label class="layui-form-label">留言区</label>
+                                <div class="layui-input-block">
+                                    <textarea name="acontent" placeholder="你想对作者说什么?" class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-inline pull-right">
+                                <div class="layui-input-inline">
+                                    <button class="layui-btn" type="button"
+                                            th:onclick="'sendComment('+${article.uid}+','+${article.id}+')'">发送评论
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="comment-list clear-float">
+                        <p class="comment-title">精彩评论</p>
+                        <!-- 评论列表 -->
+                        <ul id="ulComment" class="ul-comment-list" th:each="comment:${commentList}">
+                            <li onclick="displayForm(this)">
+
+                                <div class="comment-item">
+                                    <!-- a用户的内容为空  代表 b用户向a用户有回复内容  显示b用户的头像，否则显示a用户的头像 -->
+                                    <img class="left-img-head"
+                                         th:src="${comment.acontent == null ? comment.buser.headerImg : comment.auser.headerImg}"
+                                         alt="">
+
+                                    <div class="comment-item-body">
+                                        <div class="author-comment">
+                                            <!--判断 b用户的回复内容是否为空  为空代表没有回复   不为空 代表 b向a回复了内容-->
+                                            <span class="author-comment-item"
+                                                  th:text="${comment.bcontent == null ? comment.auser.username+':' :
+                                                comment.buser.username+' 回复 '+ comment.auser.username}">
+                                                </span>
+                                            <span class="pull-right"><a class="comment-color">&nbsp;&nbsp;回复</a></span>
+                                            <span class="pull-right">[[${#dates.format(comment.time)}]]</span>
+                                        </div>
+                                        <!-- a用户的内容为空  代表 b用户向a用户有回复内容  显示b用户的回复，否则显示a用户的回复 -->
+                                        <span th:text="${comment.acontent == null ? comment.bcontent : comment.acontent}"></span>
+                                    </div>
+                                </div>
+
+                                <form hidden="hidden" class="layui-form layui-form-pane">
+                                    <!-- 要更新评论记录的id -->
+                                    <input type="text" hidden="hidden" name="id" th:value="${comment.id}">
+                                    <!-- 要回复用户的id -->
+                                    <input type="text" hidden="hidden" name="uaid"
+                                           th:value="${comment.acontent == null ? comment.ubid : comment.uaid}">
+                                    <!-- 评论所属文章的id -->
+                                    <input type="text" hidden="hidden" name="aid" th:value="${comment.aid}">
+
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">回复</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="bcontent" required lay-verify="required"
+                                                   th:placeholder="${comment.acontent == null ? '回复'+comment.buser.username : '回复'+comment.auser.username}"
+                                                   autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn" lay-filter="*" lay-submit style="float: right;">
+                                                立即提交
+                                            </button>
+                                            <button type="reset" class="layui-btn layui-btn-primary"
+                                                    style="float: right;margin-right: 5px;">重置
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <!-- 右部 -->
+            <div class="content-right">
+                <!-- 作者介绍 -->
+                <div class="author-details">
+                    <fieldset class="layui-elem-field">
+                        <legend>作者的基本信息</legend>
+                        <div class="layui-field-box">
+                            <p class="text-center">
+                                <a th:href="@{'/article/user/info/'+${article.uid}}" target="_blank">
+                                    <img class="right-img-head" th:src="${article.user.headerImg}" alt="">
+                                </a>
+                            </p>
+                            <p class="text-center">
+                                文章作者:&nbsp;
+                                <a href="">
+                                    <span id="author">[[${article.user.username}]]</span>&nbsp;&nbsp;
+                                </a>
+                            </p>
+                            <p class="text-center">
+                                <a th:onclick="'concernAuthor('+${article.uid}+')'" class="layui-btn layui-btn-normal">点击关注</a>
+                                <a th:onclick="'collectArticle('+${article.id}+')'" class="layui-btn layui-btn-normal">好文收藏</a>
+                            </p>
+                        </div>
+                    </fieldset>
+                </div>
+                <!-- 最新评论列表 -->
+                <div class="new-comment">
+                    <h3 class="new-comment-title">最新评论</h3>
+                    <hr class="margin-none">
+                    <ul class="right-ul-comment-list" th:each="item:${newComment}">
+                        <li class="comment-item">
+                            <img class="new-comment-left-img-head" th:src="${item.auser.headerImg}" alt="">
+                            <div class="comment-item-body">
+                                <div class="author-comment">
+                                    <span class="author-comment-item">[[${item.auser.username}]]:</span>
+                                    <span class="pull-right">[[${#dates.format(item.time)}]]</span>
+                                </div>
+                                <span style="display: inline-block;">[[${item.acontent}]]</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- go top  -->
+<div id="go-top">
+    <a href="javascript:void(0)">
+        <i class="layui-icon layui-icon-top"></i>
+    </a>
+</div>
+
+<div th:replace="~{/search/search :: search_input}"></div>
+
+<script>
+
+    let layer = layui.layer;
+    let element = layui.element;
+
+    element.render();
+
+    //显示和隐藏当前的form对象  当前单击的li对象
+    function displayForm(This) {
+
+        if (window.event.target.nodeName === 'A') {
+
+            let form = This.getElementsByTagName("form")[0];
+
+            if (form.getAttribute("hidden") == "hidden") {
+
+                form.removeAttribute("hidden");
+
+            } else {
+                form.setAttribute("hidden", "hidden");
+            }
+
+        }
+    }
+
+    // 取消最新的标记
+    async function updateRepeatFlage(id) {
+
+        await new Promise(((resolve, reject) => {
+
+            fetch("/user/repeat/cancel?id=" + id
+                , {
+                    method: "get"
+                }).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+
+                    resolve();
+                });
+            });
+        }))
+
+    }
+    // 文章评论数+1
+    function updateCommentNumber(aid) {
+
+        fetch("/article/commentNumber/"+aid
+            , {
+
+                method: "get"
+
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+            });
+        });
+
+    }
+
+    // 用户回复
+    function repeatFun(form) {
+
+        // 检查用户是否登陆
+        fetch("/user/check").then((response) => {
+
+            response.json().then((data) => {
+
+                // 用户没登录
+                if (!data.flage) {
+                    layer.alert(data.msg, {
+                        time: 3000,
+                        icon: 2
+                    });
+                } else {
+                    //    要回复的用户id  回复内容 回复所属文章的id 要更新记录的id
+                    // 发表回复
+                    let formdate = new FormData(form);
+
+                    fetch("/comment/repeat"
+                        , {
+                            method: "post",
+                            body: formdate
+                        }).then((response) => {
+
+                        response.json().then((data) => {
+
+                            // 回复成功
+                            if (data.flage){
+
+                                // 取消最新的标记
+                                updateRepeatFlage(form["id"].value);
+                                // 文章评论数+1
+                                updateCommentNumber(form["aid"].value);
+
+                                // console.log(form["id"].value);
+
+                                // 刷新页面
+                                layer.alert(data.msg, {
+                                    icon: 1
+                                }, function () {
+                                    //    刷新该页面
+                                    window.location.reload(true);
+                                });
+                            }else {
+                                layer.alert(data.msg, {
+                                    time: 3000,
+                                    icon: 2
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    }
+    // 监听  回复
+    layui.use('form', function () {
+
+        let form = layui.form;
+        // 评论回复
+        form.on("submit(*)", function (data) {
+
+            let form_ = data.form;
+
+            repeatFun(form_);
+
+            console.log(form_);
+
+            return false;
+        });
+    });
+
+    // 发送评论           文章作者  文章
+    function sendComment(ubid, aid) {
+
+        console.log(ubid, aid);
+
+        // 验证内容是否为空
+        if (commentForm["acontent"].value.trim().length == 0) {
+
+            layer.msg("内容区没有内容!", {
+                time: 1000,
+                anim: 6
+            });
+
+            return;
+        }
+        // 检查用户是否登陆
+        fetch("/user/check").then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                // 用户没登录
+                if (!data.flage) {
+
+                    layer.alert(data.msg, {
+                        time: 3000,
+                        icon: 2
+                    });
+
+                } else {
+
+                    //    发表评论
+                    let formdata = new FormData(commentForm);
+                    // 文章作者
+                    formdata.append("ubid", ubid);
+
+                    formdata.append("aid", aid);
+
+                    fetch("/comment/add"
+                        , {
+                            method: "post",
+
+                            body: formdata
+
+                        }).then((response) => {
+
+                        response.json().then((data) => {
+
+                            if (data.flage) {
+
+                                commentForm.reset();
+
+                                layer.alert(data.msg, {
+                                    icon: 1
+                                }, function (index) {
+                                    layer.close(index);
+                                    //    刷新该页面
+                                    window.location.reload(true);
+                                });
+
+                            } else {
+                                layer.alert(data.msg, {
+                                    time: 3000,
+                                    icon: 2
+                                });
+                            }
+
+                        });
+                    });
+
+                }
+
+            });
+        });
+    }
+
+    let flage = false;
+    //
+    <!--点赞-->
+    //          文章id
+    function Up(aid) {
+
+        if (!flage) {
+
+            point.style.color = "red";
+
+            fetch("/article/pointNumber/" + aid).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+
+                });
+            });
+
+            flage = !flage;
+        }
+    }
+
+    // 踩一下
+    function down(This) {
+        This.style.color = "blue";
+    }
+
+    // 关注作者               用户id
+    function concernAuthor(uid) {
+
+        fetch("/concern/add/" + uid
+            , {
+
+                method: "post"
+
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                if (data.flage) {
+
+                    layer.alert(data.msg, {
+                        icon: 1,
+                        time: 3000
+                    });
+                } else {
+
+                    layer.alert(data.msg, {
+                        icon: 2,
+                        time: 3000
+                    });
+
+                }
+
+            });
+        });
+
+        console.log(uid);
+    }
+
+    //用户收藏文章          文章id
+    function collectArticle(aid) {
+
+        //该文章是否已经被该用户收藏
+
+        fetch("/collect/add/" + aid
+            , {
+
+                method: "post"
+
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                if (data.flage) {
+
+                    layer.alert(data.msg, {
+                        icon: 1,
+                        time: 3000
+                    });
+                } else {
+
+                    layer.alert(data.msg, {
+                        icon: 2,
+                        time: 3000
+                    });
+
+                }
+
+            });
+        });
+
+    }
+
+    // articleDetail();
+    // 文章的详细信息  无用
+    function articleDetail() {
+
+        fetch(""
+            , {
+
+                method: "get"
+
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+
+            });
+        });
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f2f2f2;
+}
+.layui-container .content{
+    height: 700px;
+    margin-top: 15px;
+    background-color: #ffff;
+}
+.layui-inline .article-title-input{
+    width: 400px;
+    margin-right: 100px;
+}
+.layui-tab-content .layui-form{
+    margin-top: 30px;
+}
+.layui-form .layui-form-text{
+    margin-top: 20px;
+}

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>admin管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/css/Backstage/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/Backstage/common.css}">
+
+    <script th:src="@{/js/echarts.min.js}"></script>
+
+    <script th:src="@{/js/common.js}"></script>
+</head>
+
+<body>
+    <!-- nav 导航栏 -->
+    <!-- 导航栏 -->
+    <div th:replace="nav/backstagenav :: backstagenav"></div>
+
+    <div class="container">
+        <div class="container-left pull-left">
+            <div th:replace="/nav/container_left :: left (item='sum')"></div>
+        </div>
+        <div class="container-right pull-left">
+
+            <div class="layui-tab layui-tab-brief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">网站统计&nbsp;<i class="layui-icon"></i></li>
+                </ul>
+                <div class="layui-tab-content">
+                    <!-- page 1 -->
+                    <div class="layui-tab-item layui-show">
+                        <div class="content text-center" style="display:flex;">
+
+                            <div id="main_1" style="width: 600px;height:512px;"></div>
+                            <div id="main_2" style="width: 600px;height:400px;"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+
+            //注意：导航 依赖 element 模块，否则无法进行功能性操作
+            layui.use('element', function () {
+                let element = layui.element;
+                element.render('nav');
+            });
+
+            // 基于准备好的dom，初始化echarts实例
+            let myChart_1 = echarts.init(document.getElementById('main_1'));
+            let myChart_2 = echarts.init(document.getElementById('main_2'));
+
+            renderCategoryData();
+
+            function renderCategoryData() {
+
+                fetch("/category"
+                    , {
+
+                        method: "get"
+
+                    }).then((response) => {
+
+                    response.json().then((data) => {
+
+                        console.log(data);
+
+                        let option_1 = {
+                            title: {
+                                text: '分类访问量统计情况',
+                                subtext: '实时数据',
+                                left: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                bottom: 10,
+                                left: 'center',
+                                data: ['前端开发', '后端开发', '游戏开发', '人工智能']
+                            },
+                            series: [{
+                                type: 'pie',
+                                radius: '65%',
+                                center: ['50%', '50%'],
+                                selectedMode: 'single',
+                                data: [{
+                                    value: data["1"]["visitCount"],
+                                    name: data["1"]["name"],
+                                    label: {
+                                        normal: {
+                                            backgroundColor: '#eee',
+                                            borderColor: '#777',
+                                            borderWidth: 1,
+                                            borderRadius: 4,
+                                            rich: {
+                                                title: {
+                                                    color: '#eee',
+                                                    align: 'center'
+                                                },
+                                                abg: {
+                                                    backgroundColor: '#333',
+                                                    width: '100%',
+                                                    align: 'right',
+                                                    height: 25,
+                                                    borderRadius: [4, 4, 0, 0]
+                                                },
+                                                Sunny: {
+                                                    height: 30,
+                                                    align: 'left',
+                                                },
+                                                Cloudy: {
+                                                    height: 30,
+                                                    align: 'left',
+                                                },
+                                                Showers: {
+                                                    height: 30,
+                                                    align: 'left',
+                                                },
+                                                weatherHead: {
+                                                    color: '#333',
+                                                    height: 24,
+                                                    align: 'left'
+                                                },
+                                                hr: {
+                                                    borderColor: '#777',
+                                                    width: '100%',
+                                                    borderWidth: 0.5,
+                                                    height: 0
+                                                },
+                                                value: {
+                                                    width: 20,
+                                                    padding: [0, 20, 0, 30],
+                                                    align: 'left'
+                                                },
+                                                valueHead: {
+                                                    color: '#333',
+                                                    width: 20,
+                                                    padding: [0, 20, 0, 30],
+                                                    align: 'center'
+                                                },
+                                                rate: {
+                                                    width: 40,
+                                                    align: 'right',
+                                                    padding: [0, 10, 0, 0]
+                                                },
+                                                rateHead: {
+                                                    color: '#333',
+                                                    width: 40,
+                                                    align: 'center',
+                                                    padding: [0, 10, 0, 0]
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                    {
+                                        value: data["2"]["visitCount"],
+                                        name: data["2"]["name"]
+                                    },
+                                    {
+                                        value: data["3"]["visitCount"],
+                                        name: data["3"]["name"]
+                                    },
+                                    {
+                                        value: data["4"]["visitCount"],
+                                        name: data["4"]["name"]
+                                    }
+                                ],
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                }
+                            }]
+                        };
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart_1.setOption(option_1);
+
+                    });
+                });
+
+            }
+
+            renderHotListData();
+
+            function renderHotListData() {
+
+
+                fetch("/article/sum/hot"
+                    , {
+
+                        method: "get"
+
+                    }).then((response) => {
+
+                    response.json().then((data) => {
+
+                        console.log(data);
+
+                        data.sort(function(){return Math.random()>0.5?-1:1;});
+
+                        let option_2 = {
+                            title: {
+                                text: '最热门文章访问量'
+                            },
+                            dataset: {
+                                source: [
+                                    ['score', 'amount', 'product'],
+                                    [45, data[0]["browseNumber"], data[0]["title"]],
+                                    [57.1, data[1]["browseNumber"], data[1]["title"]],
+                                    [74.4, data[2]["browseNumber"], data[2]["title"]],
+                                    [50.1, data[3]["browseNumber"], data[3]["title"]],
+                                    [89.7, data[4]["browseNumber"], data[4]["title"]],
+                                    [68.1, data[5]["browseNumber"], data[5]["title"]],
+                                    [19.6, data[6]["browseNumber"], data[6]["title"]],
+                                    [10.6, data[7]["browseNumber"], data[7]["title"]],
+                                    [32.7, data[8]["browseNumber"], data[8]["title"]]
+                                ]
+                            },
+                            grid: {
+                                containLabel: true
+                            },
+                            xAxis: {
+                                name: 'amount'
+                            },
+                            yAxis: {
+                                type: 'category'
+                            },
+                            visualMap: {
+                                orient: 'horizontal',
+                                left: 'center',
+                                min: 10,
+                                max: 100,
+                                text: ['High Score', 'Low Score'],
+                                // Map the score column to color
+                                dimension: 0,
+                                inRange: {
+                                    color: ['#D7DA8B', '#E15457']
+                                }
+                            },
+                            series: [{
+                                type: 'bar',
+                                encode: {
+                                    // Map the "amount" column to X axis.
+                                    x: 'amount',
+                                    // Map the "product" column to Y axis
+                                    y: 'product'
+                                }
+                            }]
+                        };
+
+                        myChart_2.setOption(option_2);
+
+
+                    });
+                });
+
+            }
+
+
+
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.Dao.HotDao">
+
+    <resultMap id="hotMap" type="Hot">
+
+        <id property="id" column="id"/>
+        <result property="aid" column="aid"/>
+        <result property="uid" column="uid"/>
+        <result property="time" column="time"/>
+
+        <association property="article" javaType="Article">
+
+            <id property="id" column="aid"/>
+
+            <result property="title" column="title"/>
+
+            <result property="commentNumber" column="commentNumber"/>
+
+            <association property="category" javaType="Category">
+
+                <result property="name" column="name"/>
+
+            </association>
+
+        </association>
+
+        <association property="user" javaType="User" >
+
+            <id property="id" column="aid"/>
+
+            <result property="username" column="username"/>
+
+        </association>
+
+    </resultMap>
+
+    <select id="selectAllHotArticle" resultMap="hotMap">
+        SELECT h.id as id,a.title,a.commentNumber,h.time,c.`name`,u.username,a.createtime,u.id as uid,a.id as aid
+        from article a,`user` u,hot h,category c
+        where u.id =h.uid and a.id = h.aid and c.id = a.cid
+    </select>
+
+</mapper>

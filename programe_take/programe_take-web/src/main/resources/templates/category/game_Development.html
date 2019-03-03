@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>分类页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/commonPage.css}"/>
+
+    <script defer th:src="@{/js/common.js}"></script>
+</head>
+
+<body>
+<!-- 导航栏 -->
+<div th:replace="~{/nav/main_nav :: main_nav (current='game-dev')}"></div>
+<!-- 内容区 -->
+<div class="layui-container" style="width:1200px;">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md7 layui-col-md-offset1">
+            <!-- 内容区left -->
+            <div class="content-left">
+                <ul class="list-article" id="categoryArticle">
+
+                </ul>
+                <div class="more-btn">
+                    <button onclick="loadMore()" class="layui-btn">加载更多...</button>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <!-- 内容区right -->
+            <div class="content-right">
+                <fieldset class="layui-elem-field">
+                    <legend>我的基本信息</legend>
+                    <div class="layui-field-box">
+                        <p class="text-center">
+                            <a th:href="@{'/article/user/info/'+${session.user.id}}" th:if="${session.user != null}">
+                                <img class="right-img-head" th:src="${session.user != null ? session.user.headerImg : '/Image/笑脸.png'}" alt="">
+                            </a>
+                            <a href="#" th:if="${session.user == null}">
+                                <img class="right-img-head" src="/Image/笑脸.png" alt="">
+                            </a>
+                        </p>
+                        <p class="text-center">
+                            <a href="" th:text="${session.user != null ? '用户:'+session.user.username+'&nbsp;&nbsp;' : '用户:请登录'}">
+                            </a>
+                            <span th:text="${session.user != null ? '文章数:'+session.user.articleCount : '文章数:0'}"></span>
+                        </p>
+                        <p class="text-center">
+
+                            <a th:href="@{'/article/user/info/'+${session.user.id}}" th:if="${session.user != null}" class="layui-btn layui-btn-normal">个人资料</a>
+                            <a href="#" th:if="${session.user == null}" class="layui-btn layui-btn-normal">个人资料</a>
+
+                            <span th:if="${session.user != null}">
+                                <button id="backMake" th:data-userName="${session.user.username}" class="layui-btn layui-btn-normal">后台管理</button>
+                            </span>
+                            <span th:if="${session.user == null}">
+                                <a style="display: inline-block;width: 93px;" href="/login" class="layui-btn layui-btn-normal">登录</a>
+                            </span>
+                        </p>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <!-- go top  -->
+        <div id="go-top">
+            <a href="javascript:void(0)">
+                <i class="layui-icon layui-icon-top"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- 列表区 -->
+<div class="programe-list">
+    <ul class="left-list">
+        <li class="layui-bg-gray">列表</li>
+        <li>c++</li>
+        <li>Unity</li>
+        <li>Cocos-2d</li>
+        <li>Unity-3D</li>
+        <li>3DMax</li>
+    </ul>
+</div>
+
+<div th:replace="~{/search/search :: search_input}"></div>
+
+<script>
+
+    let element = layui.element;
+
+    element.render('nav');
+    // // 后台管理按钮
+    // let backMake = document.getElementById('backMake');
+    //
+    // if (backMake) {
+    //
+    //     backMake.onclick = function () {
+    //         // 进入后台管理 需判断是否是管理员  否则进入用户的后台
+    //         goBack(this.dataset.username);
+    //     }
+    // }
+
+    // function goBack(name) {
+    //
+    //     fetch("/user/check"
+    //         , {
+    //             method: "get"
+    //         }).then((response) => {
+    //         response.json().then((data) => {
+    //
+    //             console.log(data);
+    //
+    //             if (!data.flage){
+    //
+    //                 layer.alert(data.msg, {
+    //                     icon: 2,
+    //                     time: 3000
+    //                 });
+    //             }else {
+    //                 if (name == 'admin')
+    //                     window.location.href="/admin/";
+    //                 else
+    //                     window.location.href="/user/";
+    //             }
+    //         });
+    //     });
+    //
+    // }
+
+    function updateCategoryVisitNumber() {
+
+        fetch("/category/update/3"
+            , {
+
+                method: "get"
+
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+
+            });
+        });
+
+    }
+    updateCategoryVisitNumber();
+
+    function dateConvert(date) {
+        return date.match(/(\d+-\d+-\d+)/)[0];
+    }
+
+    function frontRender() {
+
+        fetch("/article/category/3"
+            , {
+
+                method: "get"
+
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                resultHandler(data);
+
+            });
+        });
+
+    }
+
+    frontRender();
+
+    // 缓存数据
+    let cacheData = [];
+
+    // 加载更多
+    function loadMore() {
+
+        if (!cacheData.length) {
+
+            layer.msg("到底了~~", {
+                time: 1000
+            });
+
+            return;
+        }
+
+        let index = layer.load(0, {time: 1000,shade:false,offset: ['300px']});
+        // 动画加载完毕请求数据
+        setTimeout(()=>{
+            resultHandler(cacheData);
+            if (index){
+                layer.close(index);
+            }
+        },2000);
+    }
+
+    function resultHandler(data,index) {
+
+        //缓存数据
+        let i = 1;
+        let template = "";
+        while (data.length && i <= 6) {
+
+            let item = data.shift();
+
+            if (item) {
+
+                let time = dateConvert(item["createtime"]);
+
+                let hot_top = (item["topStatus"] == "1" ? "top" : item["hotStatus"] == "1" ? "hot" : "");
+
+                let hot_top_Class = null;
+                (hot_top == "top" || hot_top == "hot") && (hot_top_Class = "layui-badge");
+
+                let hot_top_Style = "";
+
+                if (hot_top) {
+
+                    hot_top_Style = hot_top == "top" ? "background-color:#FFB800" : hot_top == "hot" ? "background-color:red" : "";
+                }
+
+                let temp = `<li>
+                                    <a href="#" class="pull-left" style="display:block;">
+                                        <img class="img-head" src="${item["user"]["headerImg"]}" alt="">
+                                    </a>
+                                    <!-- 文章标题 -->
+                    <div class="article-title">
+                    <h3>
+                    <a href="/user/article/details?uid=${item["uid"]}&aid=${item["id"]}">${item["title"]}</a>
+                    <span class="pull-right ${hot_top_Class}" style="${hot_top_Style}">${hot_top}</span>
+                    </h3>
+                    </div>
+                    <!-- 时间 -->
+                    <div class="article-info">
+                    <p>
+                    <span class="author-text">${item["user"]["username"]}</span>
+                    <span class="time-text">${time}</span>
+                    <span class="">
+                    <img class="img-message" src="./Image/赞.png" alt="" srcset="">
+                    <span class="points-text">${item["pointsNumber"]}</span>
+                    </span>
+                    <span class="pull-right">
+                    <img class="img-message" src="./Image/消息.png" alt="" srcset="">
+                    <span class="message-text">${item["commentNumber"]}</span>
+                    </span>
+                    </p>
+                    </div>
+                    <hr class="layui-bg-green"></li>`;
+
+                    template += temp;
+                    }
+            i++;
+        }
+        cacheData = data;
+
+        categoryArticle.innerHTML += template;
+
+    }
+
+</script>
+</body>
+</html>

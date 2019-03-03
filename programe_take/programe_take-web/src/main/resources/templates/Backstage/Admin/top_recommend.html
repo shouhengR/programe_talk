@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>admin管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/Backstage/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/Backstage/common.css}">
+
+    <script th:src="@{/js/common.js}"></script>
+
+
+</head>
+
+<body>
+<!-- nav 导航栏 -->
+<!-- 导航栏 -->
+<div th:replace="nav/backstagenav :: backstagenav"></div>
+<div class="container">
+    <div class="container-left pull-left">
+        <div th:replace="/nav/container_left :: left (item='top')"></div>
+    </div>
+    <div class="container-right pull-left">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">置顶管理&nbsp;<i class="layui-icon"></i></li>
+            </ul>
+            <div class="layui-tab-content page_two">
+                <!-- page 置顶管理-->
+                <div class="layui-tab-item layui-show">
+
+                    <div class="content">
+                        <table id="myTopArticle" class="layui-table" lay-size="sm">
+                            <thead>
+                            <tr class="text-center">
+                                <th>id</th>
+                                <th>文章标题</th>
+                                <th>文章类别</th>
+                                <th>作者</th>
+                                <th>时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="myTopArticleTbody">
+
+                            </tbody>
+                        </table>
+                        <div class="pageGroup">
+                            <div class="page-info">
+                                <span id="myTopArticleCurrentPage"></span>
+                                <span id="myTopArticleCountPage"></span>
+                                <span id="myTopArticlePageSize"></span>
+                            </div>
+                            <div id="myTopArticleBtnGroup" class="layui-btn-group pull-right">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--热门文章 form-->
+<form action="" hidden="hidden" id="myTopArticleForm">
+    <input type="text" name="pageSize" value="5"/>
+    <input type="text" name="currentPage" value="1"/>
+    <input type="text" name="countPage" value="0">
+</form>
+
+<script>
+
+    function dateConvert(date) {
+        return date.match(/(\d+-\d+-\d+)/)[0];
+    }
+
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+
+    //             文章id  用户id
+    function delTop(aid, uid) {
+
+        console.log(uid, aid);
+
+        fetch("/top/del?uid=" + uid + "&aid=" + aid, {
+
+            method: "delete"
+
+        }).then((response) => {
+
+            response.json().then((data) => {
+
+                if (data.flage) {
+
+                    // 取消 文章置顶
+                    fetch("/article/top/update", {
+
+                        method: "post",
+
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+
+                        body: "aid=" + aid + "&topStatus=0"
+                    }).then((data) => {
+
+                        data.json().then((data) => {
+
+                            if (data.flage) {
+
+                                topArticle();
+
+                                layer.msg("已取消为推荐文章!", {
+                                    time: 1000
+                                });
+                            }
+
+                        });
+                    });
+                }
+            });
+        });
+    }
+
+    topArticle();
+
+    function topArticle() {
+
+        fetch(`/top/all?currentPage=${myTopArticleForm["currentPage"].value}
+                &pageSize=${myTopArticleForm["pageSize"].value}`, {
+            method: "get"
+        }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                let template = "";
+
+                myTopArticleCurrentPage.innerHTML = "当前第" + data["currentPage"] + "页";
+                myTopArticleCountPage.innerHTML = "共" + data["countPage"] + "页";
+                myTopArticlePageSize.innerHTML = "每页" + data["pageSize"] + "条";
+
+                for (let item of data["list"]) {
+
+                    let time = dateConvert(item["time"]);
+
+                    let temp = `<tr class="text-center">
+                                    <td>${item["id"]}</td>
+                                    <td>${item["article"]["title"]}</td>
+                                    <td>${item["article"]["category"]["name"]}</td>
+                                    <td>${item["user"]["username"]}</td>
+                                    <td>${time}</td>
+                                    <td>
+                                        <p>
+                                            <a onclick="delTop(${item["aid"]},${item["uid"]})">
+                                                <img src="/Image/置顶_1.png" width="30px" alt="">
+                                            </a>
+                                        </p>
+                                        <p>
+                                            &nbsp;&nbsp;
+                                            <span>取消置顶</span>
+                                        </p>
+                                    </td>
+                                </tr>`;
+                    <!--用户id  文章id-->
+                    template += temp;
+                }
+
+                myTopArticleTbody.innerHTML = template;
+
+                navbar("myTopArticleForm", myTopArticleBtnGroup, data["currentPage"],
+                    data["countPage"], data["pageSize"], "topArticle");
+            });
+        });
+
+    }
+
+    // 前一页
+    function afterBtn(form, fun) {
+
+        let currentPage = form["currentPage"].value;
+
+        if (currentPage == 1) return;
+
+        form["currentPage"].value = (currentPage - '0') - 1;
+
+        fun();
+
+    }
+
+    //后一页
+    function beforeBtn(form, fun) {
+
+        let currentPage = form["currentPage"].value;
+
+        if (currentPage == form["countPage"].value) return;
+
+        form["currentPage"].value = (currentPage - '0') + 1;
+
+        fun();
+    }
+
+    //              表单      按钮组   当前页     总页数   每页的大小  请求数据的接口函数
+    function navbar(form, element, currentPage, countPage, pageSize, fun) {
+        //form总页数
+        form["countPage"] = countPage;
+
+        let left = `<button class="layui-btn" onclick="afterBtn(${form},${fun})">
+                                  <i class="layui-icon layui-icon-left"></i>
+                            </button>`;
+
+        let right = `<button class="layui-btn" onclick="beforeBtn(${form},${fun})">
+                                  <i class="layui-icon layui-icon-right"></i>
+                             </button>`;
+
+        let offset = ~~(pageSize / 2);
+
+        let start = currentPage - offset < 1 ? 1 : currentPage - offset;
+
+        let end = currentPage + offset > countPage ? countPage : currentPage + offset;
+
+        let endoffset = countPage - pageSize - 1;
+
+        end = end < pageSize ? pageSize : end;
+
+        start = start > Math.abs(endoffset) ? Math.abs(endoffset) : start;
+
+        let template = left;
+
+        for (let i = start; i <= end; i++) {
+
+            let temp = `<button onclick="changeValue(${form},${i},${fun})" data-index="${i}" class="layui-btn">${i}</button>`;
+
+            template += temp;
+        }
+
+        template += right;
+
+        element.innerHTML = template;
+    }
+
+    // 改变form分页的值
+    function changeValue(element, currentPage, fun) {
+
+        element["currentPage"].value = currentPage;
+        element["pageSize"].value = 5;
+        fun();
+    }
+
+</script>
+</body>
+
+</html>

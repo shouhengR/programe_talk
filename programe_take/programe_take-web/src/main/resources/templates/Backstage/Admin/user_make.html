@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>admin管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/Backstage/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/Backstage/common.css}">
+
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
+
+</head>
+
+<body>
+    <!-- nav 导航栏 -->
+    <!-- 导航栏 -->
+    <div th:replace="nav/backstagenav :: backstagenav"></div>
+
+    <div class="container_">
+        <div class="container-left pull-left">
+            <div th:replace="/nav/container_left :: left(item='user_make')"></div>
+        </div>
+        <div class="container-right pull-left">
+            <div class="layui-tab layui-tab-brief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">用户管理&nbsp;<i class="layui-icon"></i></li>
+                </ul>
+                <div class="layui-tab-content page_two">
+                    <!-- page 2 用户管理-->
+                    <div class="layui-tab-item layui-show">
+
+                        <form id="searchForm_" class="layui-form layui-form-pane" action="">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">搜索</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="username" required="" lay-verify="required" placeholder="请输入用户名"
+                                        autocomplete="off" class="layui-input serach">
+                                </div>
+                                <div class="layui-inline">
+                                    <div class="layui-input-inline">
+                                        <button class="layui-btn" lay-submit="" lay-filter="myUserSearch">搜索</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="layui-btn-group pull-right">
+                            <button data-toggle="modal" data-target="#AddModal" class="layui-btn layui-btn-radius layui-btn-normal">添加</button>
+                            <button id="delBtn" onclick="deleteUser()" class="layui-btn layui-btn-radius layui-btn-normal">删除</button>
+                        </div>
+                        <table class="layui-table" lay-size="sm">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>id</th>
+                                    <th>用户名</th>
+                                    <th>密码</th>
+                                    <th>年龄</th>
+                                    <th>性别</th>
+                                    <th>手机号</th>
+                                    <th>加入时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myUserTbody">
+                            </tbody>
+                        </table>
+
+                        <div class="pageGroup">
+                            <div class="page-info">
+                                <span id="myUserCurrentPage"></span>
+                                <span id="myUserCountPage"></span>
+                                <span id="myUserPageSize"></span>
+                            </div>
+                            <div id="myUserBtnGroup" class="layui-btn-group pull-right">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form action="" hidden="hidden" id="myUserForm">
+        <input type="text" name="pageSize" value="5"/>
+        <input type="text" name="currentPage" value="1"/>
+        <input type="text" name="countPage" value="0">
+    </form>
+
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">我的信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="updateForm">
+                        <input type="text" name="id" hidden="hidden" id="uid">
+                        <div class="form-group">
+                            <label>username</label>
+                            <input type="text" class="form-control" disabled id="edit_username" placeholder="username">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" id="edit_password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" class="form-control" id="edit_phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label>sex</label><br/>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="edit_inlineRadio1" value="0"> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="edit_inlineRadio2" value="1"> 女
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="updateSave()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="add_myModalLabel">用户信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="addForm">
+                        <div class="form-group">
+                            <label>username </label><span id="repeatName" hidden style="color: red;">&nbsp;&nbsp;用户名重复</span>
+                            <input onblur="checkUserName();" type="text" name="username" class="form-control" id="add_username" placeholder="username">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" id="add_Password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label>age</label>
+                            <input type="text" name="age" class="form-control" id="add_age" placeholder="age">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="number" class="form-control" id="add_Phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label>sex</label><br/>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="add_Radio1" value="0"> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="add_Radio2" value="1"> 女
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="register" onclick="addUser()" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let layer = layui.layer;
+        let element = layui.element;
+        element.render('nav');
+
+        <!--数据回显-->
+        function displayUser(id){
+
+            fetch("/user/"+id).then({
+
+                method:"get"
+
+            }).then((response)=>{
+
+                response.json().then((data)=>{
+
+                    uid.value = data["id"];
+                    edit_username.value = data["username"];
+                    edit_password.value = data["password"];
+                    edit_phone.value = data["phone"];
+
+                    let sex = data["sex"] == "0" ? edit_inlineRadio1 : edit_inlineRadio2;
+
+                    sex.checked = true;
+
+                   console.log(data);
+                });
+            })
+        }
+        // 用户数据编辑保存
+        function updateSave(){
+
+            fetch("/admin/update/user",{
+
+                method:"post",
+
+                body:new FormData(updateForm)
+
+            }).then((response)=>{
+
+                response.json().then((data)=>{
+
+                   console.log(data);
+
+                    $('#EditModal').modal('hide');
+
+                    if (data.flage){
+
+                        userMake();
+                        layer.msg("更新成功!",{
+                            time:2000
+                        });
+                    }
+
+                });
+            })
+        }
+        //验证username
+        function checkUserName() {
+
+            let username = addForm["username"].value;
+
+            fetch("/checkName?username="+username).then((response)=>{
+                response.json().then((data)=>{
+
+                    //用户名存在
+                    if (data.flage){
+                        repeatName.removeAttribute("hidden");
+                        register.setAttribute("disabled",true);
+                        layer.msg('用户名重复...',{
+                            time: 1000,
+                            anim: 6
+                        });
+                    }else {
+                        register.removeAttribute("disabled");
+                        repeatName.setAttribute("hidden","hidden");
+                    }
+                });
+            });
+        }
+        //添加用户
+        function addUser(){
+
+            $.ajax({
+                url:"/user/add",
+                type:"post",
+                data:$("#addForm").serialize(),
+                success:function (data) {
+                    if (data.flage){
+
+                        $('#AddModal').modal('hide');
+
+                        userMake();
+
+                        layer.msg("添加成功!",{
+                            time:2000
+                        });
+                    }
+                }
+            })
+
+        }
+        // 删除用户
+        function deleteUser(){
+
+            let checkArr = Array.prototype.slice.call(document.querySelectorAll("input[type=checkbox]"));
+
+            let delArr = [];
+
+            for (let item of checkArr){
+
+                if (item.checked){
+                    delArr.push(item.value);
+                }
+            }
+
+            if (delArr.length){
+
+                layer.confirm('确定要删除选中的记录吗？', {
+                    btn: ['取消','确定'] //按钮
+                }, function(){
+
+                    layer.msg('已取消!', {
+                        time: 1000
+                    });
+                }, function(){
+
+                    fetch("/article/del?delArr="+delArr).then((response)=>{
+
+                        response.json().then((data)=>{
+
+                            console.log(data);
+
+                            if (data.flage){
+
+                                layer.msg('删除成功!', {icon: 1,time: 2000});
+                            }else {
+                                layer.msg('删除失败!', {icon: 2,time: 2000});
+                            }
+
+                            userMake();
+                        });
+
+                    });
+                })
+            }
+        }
+
+        // window.onload = function () {
+            //注意：导航 依赖 element 模块，否则无法进行功能性操作
+            layui.use(['element','form'], function () {
+
+                var element = layui.element;
+                var form = layui.form;
+                // 搜索
+                form.on("submit(myUserSearch)", function (data) {
+
+                    let form = data.form;
+
+                    myUserSearch(form);
+
+                    return false;
+
+                });
+            });
+
+            function dateConvert(date) {
+                return date.match(/(\d+-\d+-\d+)/)[0];
+            }
+
+            function userMake() {
+
+                fetch(`/admin/users?username=${myUserForm["currentPage"].value}
+                &pageSize=${myUserForm["pageSize"].value}`, {
+                    method: "get"
+                }).then((response) => {
+
+                    response.json().then((data) => {
+
+                        console.log(data);
+
+                        let template = "";
+
+                        myUserCurrentPage.innerHTML = "当前第" + data["currentPage"] + "页";
+                        myUserCountPage.innerHTML = "共" + data["countPage"] + "页";
+                        myUserPageSize.innerHTML = "每页" + data["pageSize"] + "条";
+
+                        for (let item of data["list"]) {
+
+                            let time = dateConvert(item["jointime"]);
+                            let sex = item["sex"] == "0" ? "男" : "女";
+
+                            let temp = ` <tr class="text-center">
+                                    <td><input type="checkbox" name="ids" value="${item["id"]}"></td>
+                                    <td>${item["username"]}</td>
+                                    <td>${item["password"]}</td>
+                                    <td>${item["age"]}</td>
+                                    <td>${sex}</td>
+                                    <td>${item["phone"]}</td>
+                                    <td>${time}</td>
+                                    <td>
+                                        <p>
+                                           <a onclick="displayUser(${item["id"]})" data-toggle="modal" data-target="#EditModal" class="layui-btn layui-btn-normal">编辑</a>
+                                        </p>
+                                    </td>
+                                </tr>`;
+                            <!--用户id  文章id-->
+                            template += temp;
+                        }
+                        myUserTbody.innerHTML = template;
+
+                        navbar("myUserForm", myUserBtnGroup, data["currentPage"],
+                            data["countPage"], data["pageSize"], "userMake");
+                    });
+                });
+            }
+            userMake();
+
+            function myUserSearch(form) {
+                if (form["username"].value == "all"){
+                    userMake();
+                } else {
+
+                    fetch(`/admin/users/search?username=${form["username"].value}`, {
+                        method: "get"
+                    }).then((response) => {
+                        response.json().then((data) => {
+
+                            console.log(data);
+
+                            let template = "";
+
+                            for (let item in data) {
+
+                                let time = dateConvert(data[item]["jointime"]);
+                                let sex = data[item]["sex"] == "0" ? "男" : "女";
+
+                                let temp = ` <tr class="text-center">
+                                    <td><input type="checkbox" name="ids" value="${data[item]["id"]}"></td>
+                                    <td>${data[item]["username"]}</td>
+                                    <td>${data[item]["password"]}</td>
+                                    <td>${data[item]["age"]}</td>
+                                    <td>${sex}</td>
+                                    <td>${data[item]["phone"]}</td>
+                                    <td>${time}</td>
+                                    <td>
+                                        <p>
+                                           <a onclick="displayUser(${data[item]["id"]})" data-toggle="modal" data-target="#EditModal" class="layui-btn layui-btn-normal">编辑</a>
+                                        </p>
+                                    </td>
+                                </tr>`;
+                                <!--用户id  文章id-->
+                                template += temp;
+                            }
+                            myUserTbody.innerHTML = template;
+
+                        });
+                    });
+                }
+                form["username"].value="";
+
+            }
+
+            // 前一页
+            function afterBtn(form, fun) {
+
+                let currentPage = form["currentPage"].value;
+
+                if (currentPage == 1) return;
+
+                form["currentPage"].value = (currentPage - '0') - 1;
+
+                fun();
+
+            }
+
+            //后一页
+            function beforeBtn(form, fun) {
+
+                let currentPage = form["currentPage"].value;
+
+                if (currentPage == form["countPage"].value) return;
+
+                form["currentPage"].value = (currentPage - '0') + 1;
+
+                fun();
+            }
+
+            //              表单      按钮组   当前页     总页数   每页的大小  请求数据的接口函数
+            function navbar(form, element, currentPage, countPage, pageSize, fun) {
+                //form总页数
+                form["countPage"] = countPage;
+
+                let left = `<button class="layui-btn" onclick="afterBtn(${form},${fun})">
+                                  <i class="layui-icon layui-icon-left"></i>
+                            </button>`;
+
+                let right = `<button class="layui-btn" onclick="beforeBtn(${form},${fun})">
+                                  <i class="layui-icon layui-icon-right"></i>
+                             </button>`;
+
+                let offset = ~~(pageSize / 2);
+
+                let start = currentPage - offset < 1 ? 1 : currentPage - offset;
+
+                let end = currentPage + offset > countPage ? countPage : currentPage + offset;
+
+                let endoffset = countPage - pageSize - 1;
+
+                end = end < pageSize ? pageSize : end;
+
+                start = start > Math.abs(endoffset) ? Math.abs(endoffset) : start;
+
+                let template = left;
+
+                for (let i = start; i <= end; i++) {
+
+                    let temp = `<button onclick="changeValue(${form},${i},${fun})" data-index="${i}" class="layui-btn">${i}</button>`;
+
+                    template += temp;
+                }
+
+                template += right;
+
+                element.innerHTML = template;
+            }
+
+            // 改变form分页的值
+            function changeValue(element, currentPage, fun) {
+
+                element["currentPage"].value = currentPage;
+                element["pageSize"].value = 5;
+                fun();
+            }
+
+        // };
+    </script>
+</body>
+
+</html>

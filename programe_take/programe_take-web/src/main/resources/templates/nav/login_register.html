@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div th:fragment="login_register (current)" id="nav" style="background-color:#52c3dd;">
+    <div class="layui-container">
+        <ul class="layui-nav" style="background-color:#52c3dd;" lay-filter="">
+            <li class="layui-nav-item"><a href="/">网上论坛</a></li>
+            <li th:class="${current == 'register' ? 'layui-nav-item pull-right layui-this' : 'layui-nav-item pull-right'}"><a href="/register">&nbsp;注册</a></li>-
+            <li class="layui-nav-item pull-right">|</li>
+            <li th:class="${current == 'login' ? 'layui-nav-item pull-right layui-this' : 'layui-nav-item pull-right'} "><a href="/login">登录</a></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

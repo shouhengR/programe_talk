@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>用户管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/Backstage/user.css}">
+    <link rel="stylesheet" th:href="@{/css/Backstage/common.css}">
+
+    <script th:src="@{/js/common.js}"></script>
+
+</head>
+
+<body>
+<!-- nav 导航栏 -->
+<!-- 导航栏 -->
+<div th:replace="/nav/backstagenav :: backstagenav"></div>
+
+<div class="container_">
+    <div class="container-left pull-left">
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li class="layui-nav-item layui-this"><a href=""><i class="layui-icon"></i> 我的主页</a></li>
+            <li class="layui-nav-item"><a href="javascript:void(0)"><i class="layui-icon layui-icon-list"></i>我的文章</a>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:void(0)">
+                <i class="layui-icon"></i>我的回复<span class="layui-badge layui-bg-orange">6</span></a>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:void(0)"><i
+                    class="layui-icon layui-icon-speaker"></i>审核状态</a></li>
+            <li class="layui-nav-item"><a href="javascript:void(0)"><i class="layui-icon layui-icon-group"></i>我的关注</a>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:void(0)"><i class="layui-icon layui-icon-star-fill"></i>我的收藏</a>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:void(0)"><i class="layui-icon"></i>个人资料</a></li>
+        </ul>
+    </div>
+    <div class="container-right pull-left">
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">我的主页&nbsp;<i class="layui-icon layui-icon-close"></i></li>
+                <li class="">我的文章&nbsp;<i class="layui-icon layui-icon-close"></i></li>
+                <li class="">我的回复&nbsp;<i class="layui-icon layui-icon-close"></i></li>
+                <li class="">审核状态&nbsp;<i class="layui-icon layui-icon-close"></i></li>
+                <li class="">我的关注&nbsp;<i class="layui-icon layui-icon-close"></i></li>
+                <li class="">我的收藏&nbsp;<i class="layui-icon layui-icon-close"></i></li>
+                <li class="">个人资料&nbsp;<i class="layui-icon layui-icon-close"></i></li>
+            </ul>
+            <div class="layui-tab-content">
+                <!-- page 1 我的主页-->
+                <div data-index class="layui-tab-item layui-show">
+                    <div class="content_one text-center">
+                        <p><img class="img-header" th:src="${session.user.headerImg}" alt=""></p>
+                        <p>
+                            <span>[[${session.user.username}]]</span>
+                        </p>
+                        <p>
+                            <span><i class="layui-icon layui-icon-log"></i>[[${#dates.format(session.user.jointime,'yyyy年MMMdd日')}]]加入</span>
+                            &nbsp;&nbsp;&nbsp;
+                            <span><i class="layui-icon layui-icon-male"></i>性别:[[${session.user.sex == 0} ? '男' : '女']]</span>
+                        </p>
+                        <div class="detail text-center">
+                            简介:
+                            <div class="detail-content"
+                                 th:text="${session.user.desc == ''} ? '暂无' : ${session.user.desc}">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- page 2 我的文章-->
+                <div class="layui-tab-item ">
+                    <div class="content_two text-center">
+                        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this">我的帖子</li>
+                            </ul>
+                            <div class="layui-tab-content">
+                                <!-- 我的帖子 -->
+                                <div class="layui-tab-item layui-show">
+                                    <!-- 搜索 -->
+                                    <form class="layui-form layui-form-pane" id="myArticleSearchForm" action="">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">搜索</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="title" required lay-verify="required"
+                                                       placeholder="请输入标题" autocomplete="off"
+                                                       class="layui-input serach">
+                                            </div>
+                                            <div class="layui-inline">
+                                                <div class="layui-input-inline">
+                                                    <button class="layui-btn" lay-submit lay-filter="myArticleSearch">
+                                                        搜索
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- 数据 -->
+                                    <table id="myArticle" class="layui-table">
+                                        <thead>
+                                        <tr class="text-center">
+                                            <th>id</th>
+                                            <th>标题</th>
+                                            <th>发帖时间</th>
+                                            <th>获赞数目</th>
+                                            <th>浏览量</th>
+                                            <th>类别</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="myArticleTbody" class="text-center">
+
+                                        </tbody>
+                                    </table>
+                                    <!-- 分页数据 -->
+                                    <div class="pageGroup">
+                                        <div class="page-info">
+                                            <span id="myArticleCurrentPage"></span>
+                                            <span id="myArticleCountPage"></span>
+                                            <span id="myArticlePageSize"></span>
+                                        </div>
+                                        <div id="myArticleBtnGroup" class="layui-btn-group pull-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- page 3 我的回复 -->
+                <div class="layui-tab-item">
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">回复</li>
+                        </ul>
+                        <div class="layui-tab-content content_three">
+                            <table class="layui-table text-center">
+                                <thead>
+                                <tr class="text-center">
+                                    <th>id</th>
+                                    <th>文章</th>
+                                    <th>留言用户</th>
+                                    <th>留言内容</th>
+                                    <th>我的回复</th>
+                                    <th>时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="repeatTbody">
+
+                                </tbody>
+                            </table>
+                            <i onclick="nextRep()" class="leftbtn pull-right layui-icon layui-icon-next"></i>
+                            <i onclick="prevRep()" class="rightbtn pull-right layui-icon layui-icon-prev">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </i>
+                            <p style="clear: both;">
+                                <span class="pull-right">后一页</span>
+                                <span class="pull-right">前一页&nbsp;&nbsp;&nbsp;</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- page 4 审核状态-->
+                <div class="layui-tab-item ">
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">状态</li>
+                        </ul>
+                        <div class="layui-tab-content content_four">
+                            <table class="layui-table text-center">
+                                <thead>
+                                <tr class="text-center">
+                                    <th>id</th>
+                                    <th>文章标题</th>
+                                    <th>类别</th>
+                                    <th>发表时间</th>
+                                    <th>状态</th>
+                                    <th>管理员回复</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="myAuditTable">
+
+                                </tbody>
+                            </table>
+                            <!-- 分页数据 -->
+                            <div class="pageGroup">
+                                <div class="page-info">
+                                    <span id="myAuditCurrentPage"></span>
+                                    <span id="myAuditCountPage"></span>
+                                    <span id="myAuditPageSize"></span>
+                                </div>
+                                <div id="auditBtnGroup" class="layui-btn-group pull-right">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- page 5 我的关注 -->
+                <div class="layui-tab-item ">
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">关注</li>
+                        </ul>
+                        <div id="concernBody" class="layui-tab-content content_five">
+                        </div>
+                    </div>
+                </div>
+                <!-- page 6 我的收藏 -->
+                <div class="layui-tab-item ">
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">我的收藏</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">
+                                <table class="layui-table text-center">
+                                    <thead>
+                                    <tr class="text-center">
+                                        <th>id</th>
+                                        <th>标题</th>
+                                        <th>作者</th>
+                                        <th>发帖时间</th>
+                                        <th>收藏时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="myCollectTbody">
+                                    </tbody>
+                                </table>
+                                <!-- 分页数据 -->
+                                <div class="pageGroup">
+                                    <div class="page-info">
+                                        <span id="myCollectCurrentPage"></span>
+                                        <span id="myCollectCountPage"></span>
+                                        <span id="myCollectPageSize"></span>
+                                    </div>
+                                    <div id="myCollectBtnGroup" class="layui-btn-group pull-right">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- page 7 个人资料 -->
+                <div class="layui-tab-item content_seven">
+
+                    <form class="layui-form" action="">
+                        <!--用户id-->
+                        <input type="text" id="id" hidden="hidden" name="id" th:value="${session.user.id}"
+                               style="display: none;">
+                        <input type="file" id="imageSelect" hidden="hidden" style="display: none;">
+                        <!--存放以上传的图片路径-->
+                        <input type="text" id="imageInput" hidden="hidden" th:value="${session.user.headerImg}"
+                               style="display: none;" name="headerImg">
+                        <div class="layui-form-item">
+                            <p>头像:<img class="img-header" id="headerImage" th:src="${session.user.headerImg}" alt=""
+                                       srcset=""></p>
+                            <div class="layui-input-block">
+                                <button class="layui-btn" id="headerImageBtn" type="button">头像更换</button>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">手机号</label>
+                            <div class="layui-input-block">
+                                <input type="text" th:value="${session.user.phone}" name="phone" required
+                                       lay-verify="required" placeholder="手机号"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="sex" value="0" title="男"/>
+                                <input type="radio" name="sex" value="1" checked title="女"/>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">简介</label>
+                            <div class="layui-input-block">
+                                <textarea name="desc" th:value="${session.user.desc}" placeholder="请输入内容"
+                                          class="layui-textarea"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="userForm">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--我的文章 form-->
+<form action="" hidden="hidden" id="myArticleForm">
+    <input type="text" name="pageSize" value="5"/>
+    <input type="text" name="currentPage" value="1"/>
+    <input type="text" name="countPage" value="0">
+</form>
+
+<!--审核状态 form-->
+<form action="" hidden="hidden" id="myAuditForm">
+    <input type="text" name="pageSize" value="5"/>
+    <input type="text" name="currentPage" value="1"/>
+    <input type="text" name="countPage" value="0">
+</form>
+
+<!--我的回复 form-->
+<form action="" hidden="hidden" id="myCommentForm">
+    <input type="text" name="pageSize" value="5"/>
+    <input type="text" name="currentPage" value="1"/>
+    <input type="text" name="countPage" value="0">
+</form>
+
+<!--我的收藏 form-->
+<form action="" hidden="hidden" id="myCollectForm">
+    <input type="text" name="pageSize" value="5"/>
+    <input type="text" name="currentPage" value="1"/>
+    <input type="text" name="countPage" value="0">
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">我的信息</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    let layer = layui.layer;
+    let form = layui.form;
+    let element = layui.element;
+    let table = layui.table;
+
+    form.render();
+    element.render();
+
+    // 左侧li
+    let aUL = document.getElementsByClassName("layui-nav")[1];
+    // 选项卡
+    let tabTitle = document.querySelector(".layui-tab-title");
+    // 选项卡内容体
+    let tabContent = document.querySelector(".layui-tab-content");
+    let aLi = Array.prototype.slice.call(aUL.children);
+    let aI = Array.prototype.slice.call(tabTitle.getElementsByTagName("i"));
+
+    tabTitle = Array.prototype.slice.call(tabTitle.children);
+    tabContent = Array.prototype.slice.call(tabContent.children);
+    ;
+    (function () {
+
+        let index_ = 0;
+        // 左侧的li单击事件
+        aLi.forEach((element, index) => {
+
+            element.onclick = function () {
+
+                switch (index) {
+                    case 0:
+                        break;
+                    case 1:
+                        myArticle();
+                        break;
+                    case 2:
+                        myRepeat();
+                        break;
+                    case 3:
+                        myAudit();
+                        break;
+                    case 4:
+                        myConcern();
+                        break;
+                    case 5:
+                        myCollect();
+                        break;
+                    case 6:
+                        break;
+                }
+
+                aLi[index_].classList.remove("layui-this");
+
+                tabContent.forEach((item,index)=>{
+                    if (item.style){
+                        tabContent[index].style.display = "none";
+                    }
+                });
+
+                this.classList.add("layui-this");
+
+                // 当前li的选项卡被隐藏，先显示
+                if (tabTitle[index].style.display === "none") {
+                    tabTitle[index].style.display = "inline-block";
+                    tabContent[index].style.display = "block";
+                }
+
+                // 显示选项卡
+                tabTitle[index_].classList.remove("layui-this");
+                tabTitle[index].classList.add("layui-this");
+                // 选项卡体
+                tabContent[index_].classList.remove("layui-show");
+                tabContent[index].classList.add("layui-show");
+
+                index_ = index;
+            };
+        });
+
+        // x图标的单击事件
+        aI.forEach((element, index) => {
+
+            element.onclick = function (event) {
+                // 当前选项隐藏
+                element.parentNode.style.display = "none";
+
+                tabContent[index].classList.remove("layui-show");
+
+                // 内容体隐藏
+                tabContent[index].style.display = "none";
+                event.stopPropagation();
+            };
+        });
+        // 选项卡的单击事件
+        tabTitle.forEach((element, index) => {
+
+            element.onclick = function () {
+                // 左侧随着选项卡改变
+                aLi[index_].classList.remove("layui-this");
+                aLi[index].classList.add("layui-this");
+
+                index_ = index;
+            };
+        });
+
+    })();
+
+    function dateConvert(date) {
+        return date.match(/(\d+-\d+-\d+)/)[0];
+    }
+
+    /*page 3我的回复数据接口*/
+    async function repeatUser(id, uaid, aid) {
+
+        let formData = new FormData();
+
+        // bcontent
+        layer.prompt({
+            title: '回复内容:',
+            formType: 2
+        }, function (text, index) {
+
+            layer.close(index);
+
+            formData.append("uaid", uaid);
+
+            formData.append("id", id);
+
+            formData.append("aid", aid);
+
+            formData.append("bcontent", text);
+
+            fetch("/comment/repeat"
+                , {
+                    method: "post",
+                    body: formData
+
+                }).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+
+                    if (data.flage) {
+
+                        // 更新标记 更新为已读回复记录
+                        updateRepeatFlage(id);
+
+                        layer.alert(data.msg, {
+                            icon: 1
+                        }, function (index) {
+                            //  todo  异步问题
+                            layer.close(index);
+                            // 重新请求数据
+                            myRepeat();
+                        });
+                    } else {
+                        layer.alert(data.msg, {
+                            time: 3000,
+                            icon: 2
+                        });
+                    }
+                });
+            });
+        });
+    }
+
+    // 取消最新的标记
+    async function updateRepeatFlage(id) {
+
+        await new Promise(((resolve, reject) => {
+
+            fetch("/user/repeat/cancel?id=" + id
+                , {
+                    method: "get"
+                }).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+
+                    resolve();
+                });
+            });
+        }))
+
+    }
+
+    // 取消 new 标志
+    function cancelHotFlage(id) {
+
+        updateRepeatFlage(id);
+
+        setTimeout(() => {
+            myRepeat();
+            layer.msg("取消成功!");
+        }, 500);
+
+    }
+
+    //前端分页缓存  当前页
+    let currentPage = 0;
+    // 数据源
+    let cacheRepeatArr = [];
+    //总记录数
+    let len = 0;
+
+    let sumPage = 0;
+
+    function nextRep() {
+
+        console.log(currentPage, sumPage);
+
+        if (currentPage + 1 == sumPage) {
+            layer.msg("这是最后一页!", {
+                anim: 6,
+                time: 1000
+            });
+            return;
+        }
+        currentPage++;
+        repeatRender(currentPage * 5);
+    }
+
+    function prevRep() {
+
+        if (currentPage - 1 < 0) {
+
+            layer.msg("这是第一页!", {
+                anim: 6,
+                time: 1000
+            });
+
+            return;
+        }
+        currentPage--;
+        repeatRender(currentPage * 5);
+    }
+
+    // 回复数据的渲染
+    async function repeatRender(start) {
+
+        let end = start + 5;
+
+        let i = 0;
+        let template = "";
+
+        while (start < end && start < len) {
+
+            let item = cacheRepeatArr[start];
+
+            let username = (item["auser"] == null ? item["buser"]["username"] : item["auser"]["username"]);
+            let content = (item["bcontent"] == null ? item["acontent"] : item["bcontent"]);
+            let time = dateConvert(item["time"]);
+            let newImg = (item["status"] == 0) ? '<img src="/Image/新.png" width="30px" alt="">' : "";
+            let uid = (item["bcontent"] == null ? item["uaid"] : item["ubid"]);
+            let repeatId = (item["repeatId"] == null ? null : item["repeatId"]);
+
+            if (repeatId) {
+
+                // 拿到repeatid 查询回复的内容
+                await new Promise(((resolve, reject) => {
+
+                    fetch("/user/repeat/content?id=" + repeatId
+                        , {
+                            method: "get"
+                        }).then((response) => {
+
+                        response.text().then((data) => {
+
+                            repeatContent = data;
+
+                            console.log("repeatContent:" + data);
+
+                            resolve();
+
+                        });
+                    });
+                }));
+
+            } else {
+                repeatContent = "暂无";
+            }
+
+            let temp = `<tr>
+                            <td>${item["id"]}</td>
+                            <td>${item["article"]["title"]}</td>
+                            <td>${username}</td>
+                            <td>${content}</td>
+                            <td>${repeatContent}</td>
+                            <td>${time}</td>
+                            <td>
+                                <ul class="repeatMakeUL">
+                                    <li class="repeatLi">
+                                        <a onclick="repeatUser(${item["id"]},${uid},${item['aid']})">
+                                            <img src="/Image/icon_回复.png" width="30px" alt="">
+                                        </a>
+                                        <span>回复</span>
+                                    </li>
+                                    <li class="flageLi">
+                                        <a onclick="cancelHotFlage(${item["id"]})">
+                                            <img src="/Image/标记.png" width="30px" alt="">
+                                        </a>
+                                        <span class="flageLi_span">标记为已读</span>
+                                    </li>
+                                    <li class="detailLi">
+                                        <a target="_blank" href="/user/article/details?aid=${item['aid']}">
+                                            <img src="/Image/详情.png" width="30px" alt="">
+                                        </a>
+                                        <span class="detailLi_span">文章详情</span>
+                                    </li>
+                                    <li class="delLi">
+                                        <a onclick="delComment(${item["id"]},${item['aid']});">
+                                            <img src="/Image/删除.png" width="30px" alt="">
+                                        </a>
+                                        <span class="delLi_span">删除</span>
+                                    </li>
+                                     <li>
+                                        ${newImg}
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>`;
+
+            start++;
+
+            template += temp;
+        }
+
+        repeatTbody.innerHTML = template;
+    }
+    //文章的评论数减一
+    function updateCommentNumber(aid) {
+
+        fetch("/article/commentNumber/reduce/"+aid
+            , {
+
+                method: "get"
+
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+            });
+        });
+
+    }
+    //删除回复记录
+    function delComment(id,aid) {
+
+        layer.confirm('你确定要删除吗？', {
+            icon: 0,
+            btn: ['取消', '确定'] //按钮
+        }, function () {
+            layer.msg('取消成功~~');
+        }, function () {
+
+            fetch("/user/repeat/delete?id=" + id
+                , {
+                    method: "delete"
+                }).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+                    if (data.flage) {
+
+                        // 对应文章下面的评论数减一
+                        updateCommentNumber(aid);
+
+                        //    todo删除记录
+                        layer.alert(data.msg, {
+                            icon: 1,
+                            skin: 'layer-ext-moon'
+                        }, function (index) {
+                            layer.close(index);
+                            myRepeat();
+                        });
+                    } else {
+                        layer.alert(data.msg, {
+                            icon: 2,
+                            skin: 'layer-ext-moon'
+                        });
+                    }
+                });
+            });
+
+        });
+
+
+    }
+
+    // 请求回复的数据
+    function myRepeat() {
+
+        cacheRepeatArr = [];
+        len = 0;
+        sumPage = 0;
+        currentPage = 0;
+        // 前台分页
+
+        fetch("/user/comments"
+            , {
+                method: "get"
+
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                cacheRepeatArr = data.sort((a, b) => {
+                    return a.status - b.status;
+                });
+
+                len = data.length;
+
+                sumPage = ~~((len + 4) / 5)
+
+                repeatRender(0);
+            });
+        });
+    }
+
+    <!-- page 2 我的文章数据接口-->
+    // 文章id
+    function delArticle(id) {
+
+        layer.confirm('您确定要删除吗？删除该文章以及以下的评论等!', {
+            icon: 2,
+            btn: ['取消', '确定'] //按钮
+        }, function () {
+            layer.msg('操作取消!', {
+                time: 1000
+            });
+        }, function () {
+
+            fetch("/user/del/article?id=" + id
+                , {
+                    method: "delete"
+                }).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+                    if (data.flage) {
+                        layer.alert(data.msg, {
+                            icon: 1,
+                            skin: 'layer-ext-moon'
+                        }, function (index) {
+                            layer.close(index);
+                            myArticle();
+                        });
+                    } else {
+                        layer.alert(data.msg, {
+                            icon: 2,
+                            skin: 'layer-ext-moon'
+                        });
+                    }
+
+                });
+            });
+
+        });
+
+
+
+    }
+
+    function myArticle() {
+        fetch(`/user/myarticle?currentPage=${myArticleForm["currentPage"].value}
+                &pageSize=${myArticleForm["pageSize"].value}`, {
+            method: "get"
+        }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                let template = "";
+
+                myArticleCurrentPage.innerHTML = "当前第" + data["currentPage"] + "页";
+                myArticleCountPage.innerHTML = "共" + data["countPage"] + "页";
+                myArticlePageSize.innerHTML = "每页" + data["pageSize"] + "条";
+
+                for (let item of data["list"]) {
+
+                    let time = dateConvert(item["createtime"]);
+
+                    let temp = ` <tr>
+                                    <td>${item["id"]}</td>
+                                    <td>${item["title"]}</td>
+                                    <td>${time}</td>
+                                    <td>${item["pointsNumber"]}</td>
+                                    <td>${item["browseNumber"]}</td>
+                                    <td>${item["category"]["name"]}</td>
+                                    <td>
+                                        <p>
+                                            <a onclick="delArticle(${item["id"]})">
+                                                <img src="/Image/删除.png" width="30px" alt="">
+                                            </a>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a href="/user/article/details?uid=${item["uid"]}&aid=${item["id"]}">
+                                                <img src="/Image/详情.png" width="30px" alt="">
+                                            </a>
+                                        </p>
+                                        <p>
+                                            <span>删除文章</span>
+                                            &nbsp;&nbsp;
+                                            <span>文章详情</span>
+                                        </p>
+                                    </td>
+                                </tr>`;
+                    <!--用户id  文章id-->
+                    template += temp;
+                }
+                myArticleTbody.innerHTML = template;
+
+                navbar("myArticleForm", myArticleBtnGroup, data["currentPage"],
+                    data["countPage"], data["pageSize"], "myArticle");
+            });
+        });
+    }
+
+    function myArticleSearch(form) {
+
+        let title = form["title"].value;
+
+        fetch("/user/myarticle/search?title=" + title, {
+            method: "get"
+        }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                let template = "";
+
+                for (let item in data) {
+
+                    let time = dateConvert(data[item]["createtime"]);
+
+                    let temp = ` <tr>
+                                    <td>${data[item]["id"]}</td>
+                                    <td>${data[item]["title"]}</td>
+                                    <td>${time}</td>
+                                    <td>${data[item]["pointsNumber"]}</td>
+                                    <td>${data[item]["browseNumber"]}</td>
+                                    <td>${data[item]["category"]["name"]}</td>
+                                    <td>
+                                        <a href="/user/article/delete?uid=${data[item]["uid"]}&aid=${data[item]["id"]}" class="layui-btn layui-btn-normal">delete</a>
+                                        <a href="/user/article/details?uid=${data[item]["uid"]}&aid=${data[item]["id"]}" class="layui-btn layui-btn-normal">details</a>
+                                    </td>
+                                </tr>`;
+                    <!--用户id  文章id-->
+                    template += temp;
+                }
+
+                myArticleTbody.innerHTML = template;
+
+            });
+
+        });
+
+    }
+
+    <!--page3 审核处理的数据接口-->
+    function myAudit() {
+
+        fetch(`/user/audits?currentPage=${myAuditForm["currentPage"].value}
+                &pageSize=${myAuditForm["pageSize"].value}`, {
+            method: "get"
+        }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                let template = "";
+
+                myAuditCurrentPage.innerHTML = "当前第" + data["currentPage"] + "页";
+                myAuditCountPage.innerHTML = "共" + data["countPage"] + "页";
+                myAuditPageSize.innerHTML = "每页" + data["pageSize"] + "条";
+
+                for (let item of data["list"]) {
+
+                    let time = dateConvert(item["auditTime"]);
+                    let status = item["status"];
+                    status = (status == 0 ? "待审核" : status == 1 ? "允许发表" : "不允许");
+                    let adminMessage = item["adminMessage"] == "" ? "暂无" : item["adminMessage"];
+                    let temp = ` <tr>
+                                    <td>${item["id"]}</td>
+                                    <td>${item["article"]["title"]}</td>
+                                    <td>${item["article"]["category"]["name"]}</td>
+                                    <td>${time}</td>
+                                    <td style="color:red;">${status}</td>
+                                    <td style="color: blue;">${adminMessage}</td>
+                                    <td>
+                                        <a href="/admin/article/details?uid=${item["uid"]}&aid=${item["aid"]}">
+                                            <i class="layui-icon layui-icon-read" style="margin: 0 10px 0 0;font-size: 25px; color: #1E9FFF;"></i>
+                                        </a>
+                                    </td>
+                                </tr>`;
+                    <!--     文章id     -->
+                    template += temp;
+                }
+                myAuditTable.innerHTML = template;
+
+                navbar("myAuditForm", auditBtnGroup, data["currentPage"],
+                    data["countPage"], data["pageSize"], "myAudit");
+            });
+        });
+    }
+
+    //page 3 我的关注
+    function myConcern() {
+
+        fetch(`/user/concern`, {
+            method: "get"
+        }).then((response) => {
+
+            response.json().then((data) => {
+
+                let template = "";
+
+                for (let item of data) {
+                    let sexClass = item["bUser"]["sex"] == "0" ? "layui-icon-male" : "layui-icon-female";
+                    let sex = item["bUser"]["sex"] == "0" ? "男" : "女";
+                    let temp = `<div class="follow text-center">
+                                <p><img src="${item["bUser"]["headerImg"]}" alt=""></p>
+                                <p><span>${item["bUser"]["username"]}</span></p>
+                                <p><span><i class="layui-icon ${sexClass}"></i>性别:${sex}</span></p>
+                                <p>
+                                    <a class="layui-btn" onclick="delConcern(${item["id"]});">取消关注</a>
+                                </p>
+                            </div>`;
+                    template += temp;
+                }
+                concernBody.innerHTML = template;
+                console.log(data);
+
+            })
+        });
+    }
+
+    // 取消关注
+    function delConcern(id) {
+
+        fetch("/user/concern/del?id=" + id
+            , {
+                method: "get"
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                if (data.flage) {
+                    layer.alert(data.msg, {
+                        icon: 1,
+                        skin: 'layer-ext-moon'
+                    }, function (index) {
+                        layer.close(index);
+                        myConcern();
+                    });
+                } else {
+                    layer.alert(data.msg, {
+                        icon: 2,
+                        skin: 'layer-ext-moon'
+                    });
+                }
+
+            });
+        });
+
+
+    }
+
+    // page5 我的收藏数据接口
+    function myCollect() {
+
+        fetch(`/user/collect?currentPage=${myCollectForm["currentPage"].value}
+                &pageSize=${myCollectForm["pageSize"].value}`, {
+            method: "get"
+        }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                let template = "";
+
+                myCollectCurrentPage.innerHTML = "当前第" + data["currentPage"] + "页";
+                myCollectCountPage.innerHTML = "共" + data["countPage"] + "页";
+                myCollectPageSize.innerHTML = "每页" + data["pageSize"] + "条";
+
+                for (let item of data["list"]) {
+                    // 发帖时间
+                    let atime = dateConvert(item["article"]["createtime"]);
+                    // 收藏时间
+                    let ctime = dateConvert(item["time"]);
+                    let temp = `<tr>
+                                    <td>${item["id"]}</td>
+                                    <td>${item["article"]["title"]}</td>
+                                    <td>${item["user"]["username"]}</td>
+                                    <td>${atime}</td>
+                                    <td>${ctime}</td>
+                                    <td id="make">
+                                        <p>
+                                            <a href="/user/collect/delete/${item["id"]}">
+                                                <img src="/Image/收藏.png" width="30px" alt="">
+                                            </a>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a href="/user/article/details?aid=${item["article"]["id"]}">
+                                                <img src="/Image/详情.png" width="30px" alt="">
+                                            </a>
+                                        </p>
+                                        <p>
+                                            <span>取消收藏</span>
+                                            &nbsp;&nbsp;
+                                            <span>文章详情</span>
+                                        </p>
+                                    </td>
+                                </tr>`;
+                    <!--用户id  文章id-->
+                    template += temp;
+                }
+
+                myCollectTbody.innerHTML = template;
+
+                navbar("myCollectForm", myCollectBtnGroup, data["currentPage"],
+                    data["countPage"], data["pageSize"], "myCollect");
+            });
+        });
+    }
+
+    // page 6个人资料更新
+    //头像上传处理
+    headerImageBtn.onclick = () => {
+        imageSelect.click();
+    };
+    //存放上传图片的formdata
+    let imgForm = null;
+    imageSelect.onchange = function (event) {
+
+        console.log(this.files[0]);
+
+        let image = this.files[0];
+
+        let url = URL.createObjectURL(image);
+        // 改变临时头像
+        headerImage.src = url;
+
+        imgForm = new FormData();
+
+        imgForm.append("file", image);
+
+    };
+
+    //个人资料更新
+    function myDetails(form) {
+
+        let formdata = new FormData(form);
+
+        fetch("/user/update", {
+
+            method: "post",
+            body: formdata
+
+        }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                if (data.flage) {
+                    layer.msg('更新成功!', {
+                        time: 2000
+                    }, function () {
+
+                        form.reset();
+                        // 重新渲染nav
+                        element.render();
+
+                        window.location.href = "/user/";
+                    });
+
+                }
+
+            });
+
+        });
+    }
+
+    // 前一页
+    function afterBtn(form, fun) {
+
+        let currentPage = form["currentPage"].value;
+
+        if (currentPage == 1) return;
+
+        form["currentPage"].value = (currentPage - '0') - 1;
+
+        fun();
+
+    }
+
+    //后一页
+    function beforeBtn(form, fun) {
+
+        let currentPage = form["currentPage"].value;
+
+        if (currentPage == form["countPage"].value) return;
+
+        form["currentPage"].value = (currentPage - '0') + 1;
+
+        fun();
+    }
+
+    //              表单      按钮组   当前页     总页数   每页的大小  请求数据的接口函数
+    function navbar(form, element, currentPage, countPage, pageSize, fun) {
+        //form总页数
+        form["countPage"] = countPage;
+
+        let left = `<button class="layui-btn" onclick="afterBtn(${form},${fun})">
+                                  <i class="layui-icon layui-icon-left"></i>
+                            </button>`;
+
+        let right = `<button class="layui-btn" onclick="beforeBtn(${form},${fun})">
+                                  <i class="layui-icon layui-icon-right"></i>
+                             </button>`;
+
+        let offset = ~~(pageSize / 2);
+
+        let start = currentPage - offset < 1 ? 1 : currentPage - offset;
+
+        let end = currentPage + offset > countPage ? countPage : currentPage + offset;
+
+        let endoffset = countPage - pageSize - 1;
+
+        end = end < pageSize ? pageSize : end;
+
+        start = start > Math.abs(endoffset) ? Math.abs(endoffset) : start;
+
+        let template = left;
+
+        for (let i = start; i <= end; i++) {
+
+            let temp = `<button onclick="changeValue(${form},${i},${fun})" data-index="${i}" class="layui-btn">${i}</button>`;
+
+            template += temp;
+        }
+
+        template += right;
+
+        element.innerHTML = template;
+    }
+
+    // 改变form分页的值
+    function changeValue(element, currentPage, fun) {
+
+        element["currentPage"].value = currentPage;
+        element["pageSize"].value = 5;
+        fun();
+    }
+
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    form.on("submit(myArticleSearch)", function (data) {
+
+        let form = data.form;
+
+        myArticleSearch(form);
+
+        return false;
+
+    });
+
+    //  用户资料
+    form.on("submit(userForm)", function (data) {
+
+        let form = data.form;
+
+        new Promise((resolve, reject) => {
+            //  图片上传
+            if (imgForm) {
+                fetch("/uploadFile", {
+
+                    method: "post",
+
+                    body: imgForm
+
+                }).then((response) => {
+
+                    response.text().then((data) => {
+
+                        imageInput.value = data;
+
+                        resolve();
+                    });
+
+                });
+            } else {
+                resolve();
+            }
+        }).then(() => {
+
+            myDetails(form);
+
+        });
+
+        return false;
+
+    });
+    // };
+</script>
+</body>
+
+</html>

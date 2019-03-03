@@ -1,0 +1,17 @@
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+    username: root
+    password: 721000
+    url: jdbc:mysql://localhost:3306/program_take?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  messages:
+    basename: i18n.login
+
+
+mybatis:
+  config-location: classpath:public/mapper/mybatis-config.xml
+  mapper-locations: classpath:public/mapper/*Mapper.xml

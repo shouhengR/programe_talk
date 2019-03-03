@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tang.Dao.ConcernDao">
+
+    <resultMap id="concernsResultMap" type="Concerns">
+
+        <id property="id" column="id"/>
+
+        <result property="auid" column="auid"/>
+
+        <result property="buid" column="buid"/>
+
+        <association property="bUser" javaType="User">
+
+            <id property="id" column="buid"/>
+
+            <result property="username" column="username"/>
+
+            <result property="age" column="age"/>
+
+            <result property="sex" column="sex"/>
+
+            <result property="headerImg" column="headerImg"/>
+
+        </association>
+
+    </resultMap>
+
+    <select id="selectByUserId" resultMap="concernsResultMap">
+      SELECT * FROM concerns c,`user` u
+      WHERE c.auid = #{auid} and c.buid = u.id
+    </select>
+</mapper>

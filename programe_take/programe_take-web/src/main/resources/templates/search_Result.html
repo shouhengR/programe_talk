@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>搜索结果</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/search_Result.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+
+    <script defer th:src="@{/js/common.js}"></script>
+
+</head>
+
+
+<body>
+    <!-- 导航栏 -->
+
+    <div th:replace="~{/nav/main_nav :: main_nav (current='index')}"></div>
+
+    <!-- 整个内容区 -->
+    <div class="layui-container">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md8">
+                <!-- 左部 -->
+                <div class="content-left">
+                    <div class="layui-card">
+                        <div class="layui-card-header search-title">搜索结果</div>
+                        <div class="layui-card-body">
+                            <div class="top-max-content">
+                                <ul th:each="item:${resultMap}" class="list-article">
+                                    <li>
+                                        <!-- 头像 -->
+                                        <a th:href="@{/article/user/info/item['uid']}" target="_blank" class="pull-left" style="display:block;">
+                                            <img class="img-head" th:src="${item['user']['headerImg']}" alt="">
+                                        </a>
+
+                                        <!-- 文章标题 -->
+                                        <div class="article-title">
+                                            <h3>
+                                                <a th:href="'/user/article/details?uid='+${item['uid']}+'&aid='+${item['id']}">[[${item['title']}]]</a>
+                                            </h3>
+                                        </div>
+                                        <!-- 时间 -->
+                                        <div class="article-info">
+                                            <p>
+                                                <span class="author-text">[[${item['user']['username']}]]</span>
+                                                <span class="time-text">[[${#dates.format(item['createtime'])}]]</span>
+                                                <span class="">
+                                                <img class="img-message" src="/Image/赞.png" alt="" srcset="">
+                                                <span class="points-text">[[${item["pointsNumber"]}]]</span>
+                                            </span>
+                                                <span class="pull-right">
+                                                <img class="img-message" src="/Image/消息.png" alt="" srcset="">
+                                                <span class="message-text">[[${item["commentNumber"]}]]</span>
+                                            </span>
+
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <!-- 右部 -->
+                <div class="content-right">
+                    <fieldset class="layui-elem-field">
+                        <legend>我的基本信息</legend>
+                        <div class="layui-field-box">
+                            <p class="text-center">
+                                <img class="right-img-head" th:src="${session.user != null ? session.user.headerImg : '/Image/笑脸.png'}" alt="">
+                            </p>
+                            <p class="text-center">
+                                <a href="" th:text="${session.user != null ? '用户:'+session.user.username+'&nbsp;&nbsp;' : '用户:请登录'}">
+                                </a>
+                                <span th:text="${session.user != null ? '文章数:'+session.user.articleCount : '文章数:0'}"></span>
+                            </p>
+                            <p class="text-center">
+
+                                <a th:if="${session.user != null}" th:href="@{/article/user/info/session.user.id}" class="layui-btn layui-btn-normal">个人资料</a>
+                                <a th:if="${session.user == null}" th:href="" class="layui-btn layui-btn-normal">个人资料</a>
+                                <span th:if="${session.user != null}">
+                                    <button id="backMake" th:data-userName="${session.user.username}" class="layui-btn layui-btn-normal">后台管理</button>
+                                </span>
+                                <span th:if="${session.user == null}">
+                                    <a style="display: inline-block;width: 93px;" href="/login" class="layui-btn layui-btn-normal">登录</a>
+                                </span>
+                            </p>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{/search/search :: search_input}"></div>
+
+    <script>
+
+        // if ()
+        //
+        // backMake.onclick = function () {
+        //     goBack(this.dataset.username);
+        // };
+
+        // function goBack(name) {
+        //
+        //     fetch("/user/check"
+        //         , {
+        //             method: "get"
+        //         }).then((response) => {
+        //         response.json().then((data) => {
+        //
+        //             console.log(data);
+        //
+        //             if (!data.flage){
+        //
+        //                 layer.alert(data.msg, {
+        //                     icon: 2,
+        //                     time: 3000
+        //                 });
+        //             }else {
+        //                 if (name == 'admin')
+        //                     window.location.href="/admin/";
+        //                 window.location.href="/user/";
+        //             }
+        //         });
+        //     });
+        //
+        // }
+
+    </script>
+
+</body>
+
+</html>

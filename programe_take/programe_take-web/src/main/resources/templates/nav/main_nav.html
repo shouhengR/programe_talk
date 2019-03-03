@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="main_nav (current)" id="nav" style="background-color:#52c3dd;">
+    <div class="layui-container" style="width:1300px;">
+        <ul class="layui-nav" style="background-color:#52c3dd;" lay-filter="">
+            <li class="layui-nav-item" style="font-size:18px;"><a href="/">网上论坛</a></li>
+            <li th:class="${current == 'index' ? 'layui-nav-item layui-this' : 'layui-nav-item'}"><a href="/">首页</a></li>
+            <li th:class="${current == 'front-dev' ? 'layui-nav-item layui-this' : 'layui-nav-item'}"><a
+                    href="/front">前端开发</a></li>
+            <li th:class="${current == 'backend-dev' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/backed">后端开发</a></li>
+            <li th:class="${current == 'game-dev' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/game">游戏开发</a>
+            </li>
+            <li th:class="${current == 'ai-dev' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/ai">人工智能</a>
+            </li>
+            <li th:class="${current == 'notice' ? 'layui-nav-item layui-this' : 'layui-nav-item'}">
+                <a href="/notice">公告</a></li>
+
+            <li th:if="${session.user == null}" class="layui-nav-item pull-right">
+                <a href="/register">注册</a>
+            </li>
+            <li th:if="${session.user == null}" class="layui-nav-item pull-right">
+                <a href="/login">登入<span class="layui-badge-dot layui-bg-orange"></span></a>
+            </li>
+
+            <li th:if="${session.user != null}" class="layui-nav-item pull-right">
+                <a th:if="${session.user.username == 'admin'}" th:href="@{/admin/}">个人中心<span class="layui-badge-dot"></span></a>
+                <a th:if="${session.user.username != 'admin'}" th:href="@{/user/}">个人中心<span class="layui-badge-dot"></span></a>
+            </li>
+            <li th:if="${session.user != null}" class="layui-nav-item pull-right">
+                <a href="">
+                    <img th:src="${session.user.headerImg}" class="layui-nav-img">[[${session.user.username}]]
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:void(0);">在线状态</a></dd>
+                    <dd><a href="javascript:void(0);" onclick="loginOut()">登出</a></dd>
+                </dl>
+            </li>
+
+            <li class="search-item pull-right search">
+                <form id="searchForm" class="layui-form" style="height:38px;" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block search-margin">
+                            <input id="search" type="text" name="searchKey" placeholder="请输入搜索内容" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                </form>
+                <a onclick="goSearch(searchForm)" class="layui-btn pull-right">搜索</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>admin管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
+    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/Backstage/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/Backstage/common.css}">
+
+    <script th:src="@{/js/common.js}"></script>
+
+</head>
+
+<body>
+    <!-- nav 导航栏 -->
+    <!-- 导航栏 -->
+    <div th:replace="nav/backstagenav :: backstagenav"></div>
+
+    <div class="container_">
+        <div class="container-left pull-left">
+            <div th:replace="/nav/container_left :: left(item='audit_make')"></div>
+        </div>
+        <div class="container-right pull-left">
+            <div class="layui-tab layui-tab-brief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">审核处理&nbsp;<i class="layui-icon"></i></li>
+                </ul>
+                <div class="layui-tab-content page_two">
+                    <!-- page 4 评论管理-->
+                    <div class="layui-tab-item layui-show">
+                        <div class="content">
+                            <table id="myAudit" class="layui-table" lay-size="sm">
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>文章标题</th>
+                                        <th>文章类别</th>
+                                        <th>用户</th>
+                                        <th>状态</th>
+                                        <th>我的回复</th>
+                                        <th>发布时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="auditAllTbody" class="text-center">
+                                </tbody>
+                            </table>
+
+                            <div class="pageGroup">
+                                <div class="page-info">
+                                    <span id="myAuditCurrentPage"></span>
+                                    <span id="myAuditCountPage"></span>
+                                    <span id="myAuditPageSize"></span>
+                                </div>
+                                <div class="layui-btn-group pull-right" id="auditBtnGroup">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- 分页form -->
+    <form action="" hidden="hidden" id="auditForm">
+        <input type="text" name="pageSize" value="5"/>
+        <input type="text" name="currentPage" value="1"/>
+        <input type="text" name="countPage" value="0">
+    </form>
+<!-- 审核结果form -->
+    <form action="" hidden="hidden" id="resultForm">
+        <!--审核记录id-->
+        <input type="text" name="auditId" value="0"/>
+        <!--文章的id-->
+        <input type="text" name="articleId" value="0"/>
+        <!--1 通过，2不通过-->
+        <input type="text" name="status" value="0"/>
+        <!--用户id -->
+        <input type="text" name="uid" value="0"/>
+    </form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal_Allow" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">留言</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="layui-form" action="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">message:</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="msg" name="msg" required lay-verify="required" placeholder="请输入留言"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="submitResult()" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // window.onload = function () {
+
+            //注意：导航 依赖 element 模块，否则无法进行功能性操作
+            layui.use('element', function () {
+                var element = layui.element;
+                element.render('nav');
+            });
+            let layer = layui.layer;
+
+            function dateConvert(date) {
+                return date.match(/(\d+-\d+-\d+)/)[0];
+            }
+
+            <!-- 审核处理的数据接口-->
+            function AuditAll() {
+
+                fetch(`/admin/audits?currentPage=${auditForm["currentPage"].value}
+                &pageSize=${auditForm["pageSize"].value}`, {
+                    method: "get"
+                }).then((response) => {
+
+                    response.json().then((data) => {
+
+                        console.log(data);
+
+                        let template = "";
+
+                        myAuditCurrentPage.innerHTML = "当前第" + data["currentPage"] + "页";
+                        myAuditCountPage.innerHTML = "共" + data["countPage"] + "页";
+                        myAuditPageSize.innerHTML = "每页" + data["pageSize"] + "条";
+
+                        for (let item of data["list"]) {
+
+                            let time = dateConvert(item["auditTime"]);
+                            let status = item["status"] == 0 ? "待审核" : "已审核";
+                            let adminMessage = item["adminMessage"] == "" ? "暂无" : item["adminMessage"];
+                            let temp = ` <tr>
+                                            <td>${item["id"]}</td>
+                                            <td>${item["article"]["title"]}</td>
+                                            <td>${item["article"]["category"]["name"]}</td>
+                                            <td>${item["user"]["username"]}</td>
+                                            <td style="color:red;">${status}</td>
+                                            <td style="color: blue;">${adminMessage}</td>
+                                            <td>${time}</td>
+                                            <td>
+                                                <i onclick="allow(1,${item['id']},${item['article']['id']},${item['uid']})" class="layui-icon layui-icon-face-smile" data-toggle="modal" data-target="#myModal_Allow" style="margin: 0 10px 0 0;font-size:25px; color: #1E9FFF;"></i>
+                                                <i onclick="noAllow(2,${item['id']},${item['article']['id']},${item['uid']})" class="layui-icon layui-icon-face-cry" data-toggle="modal" data-target="#myModal_Allow" style="margin: 0 10px 0 0;font-size:25px; color: red;"></i>
+                                                <a href="/admin/article/details?uid=${item["uid"]}&aid=${item["aid"]}">
+                                                    <i class="layui-icon layui-icon-read" style="margin: 0 10px 0 0;font-size: 25px; color: #1E9FFF;"></i>
+                                                </a>
+                                            </td>
+                                        </tr>`;
+                                                        <!--    审核id               文章id     -->
+                            template += temp;
+                        }
+                        auditAllTbody.innerHTML = template;
+
+                        navbar("auditForm", auditBtnGroup, data["currentPage"],
+                            data["countPage"], data["pageSize"], "AuditAll");
+                    });
+                });
+            }
+
+            AuditAll();
+
+            function submitResult() {
+
+                let formData = new FormData(resultForm);
+
+                formData.append("msg",msg.value);
+
+                fetch("/admin/audit/update",{
+                    method:"post",
+                    body:formData
+                }).then((response)=>{
+
+                    response.json().then((data)=>{
+
+                        $('#myModal_Allow').modal('hide');
+
+                        if (data.flage){
+                            layer.alert('审核成功', {
+                                icon: 1,
+                                skin: 'layer-ext-moon'
+                            },function (index) {
+                                layer.close(index);
+                                AuditAll();
+
+                                msg.value="";
+                            });
+                        }
+                    });
+                })
+
+            }
+
+            function allow(status,auditId,articleId,uid) {
+                resultForm["auditId"].value = auditId;
+                resultForm["articleId"].value = articleId;
+                resultForm["status"].value = status;
+                resultForm["uid"].value = uid;
+            }
+
+            function noAllow(status,auditId,articleId,uid) {
+                resultForm["auditId"].value = auditId;
+                resultForm["articleId"].value = articleId;
+                resultForm["status"].value = status;
+                resultForm["uid"].value = uid;
+            }
+
+            // 前一页
+            function afterBtn(form, fun) {
+
+                let currentPage = form["currentPage"].value;
+
+                if (currentPage == 1) return;
+
+                form["currentPage"].value = (currentPage - '0') - 1;
+
+                fun();
+
+            }
+
+            //后一页
+            function beforeBtn(form, fun) {
+
+                let currentPage = form["currentPage"].value;
+
+                if (currentPage == form["countPage"].value) return;
+
+                form["currentPage"].value = (currentPage - '0') + 1;
+
+                fun();
+            }
+
+            //              表单      按钮组   当前页     总页数   每页的大小  请求数据的接口函数
+            function navbar(form, element, currentPage, countPage, pageSize, fun) {
+                //form总页数
+                form["countPage"] = countPage;
+
+                let left = `<button class="layui-btn" onclick="afterBtn(${form},${fun})">
+                                  <i class="layui-icon layui-icon-left"></i>
+                            </button>`;
+
+                let right = `<button class="layui-btn" onclick="beforeBtn(${form},${fun})">
+                                  <i class="layui-icon layui-icon-right"></i>
+                             </button>`;
+
+                let offset = ~~(pageSize / 2);
+
+                let start = currentPage - offset < 1 ? 1 : currentPage - offset;
+
+                let end = currentPage + offset > countPage ? countPage : currentPage + offset;
+
+                let endoffset = countPage - pageSize - 1;
+
+                end = end < pageSize ? pageSize : end;
+
+                start = start > Math.abs(endoffset) ? Math.abs(endoffset) : start;
+
+                let template = left;
+
+                for (let i = start; i <= end; i++) {
+
+                    let temp = `<button onclick="changeValue(${form},${i},${fun})" data-index="${i}" class="layui-btn">${i}</button>`;
+
+                    template += temp;
+                }
+
+                template += right;
+
+                element.innerHTML = template;
+            }
+
+            // 改变form分页的值
+            function changeValue(element, currentPage, fun) {
+
+                element["currentPage"].value = currentPage;
+                element["pageSize"].value = 5;
+                fun();
+            }
+
+
+        // };
+    </script>
+</body>
+
+</html>

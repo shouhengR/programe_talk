@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tang.Dao.CommentDao">
+
+    <resultMap id="CommentResultMap" type="Comment">
+
+        <id property="id" column="id"/>
+        <result property="uaid" column="uaid"/>
+        <result property="acontent" column="acontent"/>
+        <result property="ubid" column="ubid"/>
+        <result property="bcontent" column="bcontent"/>
+        <result property="time" column="time"/>
+        <result property="aid" column="aid"/>
+        <result property="status" column="status"/>
+        <result property="repeatId" column="repeatId"/>
+
+        <association property="auser" javaType="User">
+
+            <result property="headerImg" column="aheaderImg"/>
+            <result property="username" column="ausername"/>
+
+        </association>
+
+        <association property="article" column="article" >
+            <result property="title" column="title"/>
+        </association>
+
+        <association property="buser" javaType="User">
+
+            <result property="headerImg" column="bheaderImg"/>
+            <result property="username" column="busername"/>
+
+        </association>
+
+    </resultMap>
+
+    <select id="selectCommentByArticleId" resultMap="CommentResultMap">
+        SELECT c.id,c.uaid,c.acontent,c.ubid,c.bcontent,c.time,c.aid,c.status,c.repeatId,a.headerImg as aheaderImg,b.headerImg as bheaderImg,
+        a.username as ausername,b.username as busername
+        from `comment` c,`user` a,`user` b
+        WHERE c.aid = #{aid} and a.id = c.uaid and b.id = c.ubid
+    </select>
+
+    <!--SELECT c.id,ar.title,c.uaid,c.acontent,c.ubid,c.bcontent,c.time,c.aid,c.status,c.repeatId,a.headerImg as aheaderImg,b.headerImg as bheaderImg,-->
+    <!--a.username as ausername,b.username as busername-->
+    <!--from `comment` c,`user` a,`user` b,article ar-->
+    <!--WHERE a.id = c.uaid and b.id = c.ubid-->
+
+    <select id="selectAllAdminComment" resultMap="CommentResultMap">
+        SELECT c.id,c.uaid,c.acontent,c.ubid,c.bcontent,c.time,c.aid,c.status,c.repeatId
+        from `comment` c
+        where c.id not in (SELECT repeatId FROM `comment` WHERE not ISNULL(repeatId)) limit #{strat},5
+    </select>
+
+
+    <resultMap id="UserCommentResultMap" type="Comment">
+
+        <id property="id" column="id"/>
+        <result property="uaid" column="uaid"/>
+        <result property="acontent" column="acontent"/>
+        <result property="ubid" column="ubid"/>
+        <result property="bcontent" column="bcontent"/>
+        <result property="time" column="time"/>
+        <result property="aid" column="aid"/>
+        <result property="status" column="status"/>
+        <result property="repeatId" column="repeatId"/>
+
+        <association property="auser" javaType="User">
+
+            <result property="username" column="Ausername"/>
+
+        </association>
+
+        <association property="article" javaType="Article">
+
+            <result property="title" column="title"/>
+
+        </association>
+
+    </resultMap>
+
+    <select id="selectNewComment" resultMap="CommentResultMap">
+        SELECT c.id,c.uaid,c.acontent,c.ubid,c.bcontent,c.time,c.aid,c.repeatId,a.headerImg as aheaderImg,b.headerImg as bheaderImg,
+        a.username as ausername,b.username as busername
+        from `comment` c,`user` a,`user` b
+        WHERE a.id = c.uaid and c.aid = #{aid} and not ISNULL(c.acontent) and b.id = c.ubid order by c.time desc limit 0,5
+    </select>
+
+
+    <insert id="repeatComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
+        insert into comment values(null,#{uaid},#{acontent},#{ubid},#{bcontent},#{time},#{aid},#{status},#{repeatId})
+    </insert>
+
+<!-- 用户评论我的文章-->
+
+    <select id="selectUserComment" resultMap="UserCommentResultMap">
+
+       SELECT c.id,c.uaid,c.acontent,c.ubid,c.bcontent,c.time,c.aid,c.status,c.repeatId,a.title,u.username as Ausername
+        from `comment` c,article a,`user` u
+        WHERE c.ubid = #{ubid} AND ISNULL(c.bcontent) and a.id = c.aid and u.id = uaid
+
+    </select>
+
+    <resultMap id="UserRepeatResultMap" type="Comment">
+
+        <id property="id" column="id"/>
+        <result property="uaid" column="uaid"/>
+        <result property="acontent" column="acontent"/>
+        <result property="ubid" column="ubid"/>
+        <result property="bcontent" column="bcontent"/>
+        <result property="time" column="time"/>
+        <result property="aid" column="aid"/>
+        <result property="status" column="status"/>
+        <result property="repeatId" column="repeatId"/>
+
+        <association property="buser" javaType="User">
+
+            <result property="username" column="Busername"/>
+
+        </association>
+
+        <association property="article" javaType="Article">
+
+            <result property="title" column="title"/>
+
+        </association>
+
+    </resultMap>
+
+    <!-- 别的用户对我发表的留言有回复-->
+    <select id="selectUserRepeat" resultMap="UserRepeatResultMap">
+
+        SELECT c.id,c.uaid,c.acontent,c.ubid,c.bcontent,c.time,c.aid,c.status,c.repeatId,a.title,u.username as Busername
+        from `comment` c,article a,`user` u
+        WHERE c.uaid = #{uaid} AND ISNULL(c.acontent) and a.id = c.aid and u.id = ubid
+
+    </select>
+
+    <!--
+        别人回复我的评论   acontent为null 代表回复
+        SELECT c.id,c.uaid,c.acontent,c.ubid,c.bcontent,c.time,c.aid,a.title,u.username
+        from `comment` c,article a,`user` u
+        WHERE c.uaid = 7 AND ISNULL(c.acontent) and a.id = c.aid and u.id = ubid and c.`status` = 0
+
+        别人评论我的文章   bcontent为空代表  文章下面的评论
+        SELECT c.id,c.uaid,c.acontent,c.ubid,c.bcontent,c.time,c.aid,a.title,u.username
+        from `comment` c,article a,`user` u
+        WHERE c.ubid = 7 AND c.bcontent = '' and a.id = c.aid and u.id = uaid and c.`status` = 0
+
+    -->
+
+</mapper>

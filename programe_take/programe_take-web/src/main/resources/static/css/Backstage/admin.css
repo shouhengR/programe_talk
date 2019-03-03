@@ -1,0 +1,53 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #ffffff;
+}
+.container-left .layui-nav{
+    height: calc(100vh - 60px);
+}
+
+.container-right .layui-tab {
+    position: absolute;
+    width: 1200px;
+    z-index: 2;
+}
+#nav .layui-nav-img{
+    width: 40px;
+    height: 40px;
+}
+
+.layui-nav{
+    margin-bottom: 0;
+}
+
+.layui-nav i{
+    margin: 5px;
+}
+
+/* first */
+.content .img-header{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.content p{
+    margin-bottom: 10px;
+}
+.detail .detail-content{
+    display: inline-block;
+    width: 400px;
+    height: 400px;
+    background: #f2f2f2;
+}
+/* two */
+.container-right .layui-tab-content{
+    height: 600px;
+}
+
+#myModal .layui-input-block {
+    margin-left: 80px;
+}

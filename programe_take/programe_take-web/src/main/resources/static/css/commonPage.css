@@ -1,0 +1,83 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #f2f2f2;
+}
+.layui-container .content-left{
+    width: 100%;
+    min-height: 700px;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #fff;
+}
+.content-left .list-article{
+    min-height: 350px;
+}
+.list-article .article-title {
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0 0 10px 10px;
+    overflow: hidden;
+
+}
+.list-article .img-head{
+    width: 50px;
+    height: 50px;
+}
+.list-article .article-title:hover{
+    color: #52c3dd;
+}
+
+.list-article .article-info{
+    cursor: pointer;
+    padding-left: 10px;
+    overflow: hidden;
+}
+.time-text,.author-text,.message-text,.points-text{
+    color:#5a5652;
+    margin-right: 5px;
+}
+
+.layui-container .content-right{
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 5px;
+    background-color: #fff;
+}
+
+.programe-list{
+    position: absolute;
+    left: 19%;top: 70px;
+    height: 300px;width: 100px;
+    background-color: #fff;
+}
+.programe-list .left-list{
+    padding: 10px;
+}
+.left-list li{
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #676f6f;
+}
+.content-left .more-btn{
+    text-align: center;
+}
+.content-right .layui-field-box{
+    padding:0px 15px 10px 15px;
+}
+.layui-elem-field legend{
+    font-size: 14px;
+}
+.content-right p{
+    margin-top: 10PX;
+}
+.content-right .right-img-head{
+    width: 30%;height: 30%;
+    border-radius: 50%;
+    margin-top: 20PX;
+}

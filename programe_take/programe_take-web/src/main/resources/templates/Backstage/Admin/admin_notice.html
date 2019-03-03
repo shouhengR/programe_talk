@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/Backstage/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/Backstage/common.css}">
+
+    <script th:src="@{/js/common.js}"></script>
+
+</head>
+
+<body>
+<!-- 导航栏 -->
+<div th:replace="nav/backstagenav :: backstagenav"></div>
+<!-- 整个内容区 -->
+<div class="container">
+    <div class="container-left pull-left">
+        <div th:replace="/nav/container_left :: left (item='notic')"></div>
+    </div>
+    <div class="container-right pull-left">
+
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">系统公告&nbsp;<i class="layui-icon"></i></li>
+            </ul>
+            <div class="layui-tab-content page_two">
+                <!-- page  系统公告-->
+                <div class="layui-tab-item layui-show">
+                    <div class="content">
+                        <fieldset class="layui-elem-field">
+                            <legend style="text-align: center;">系统公告</legend>
+                            <div class="layui-field-box">
+                                <form class="layui-form" id="noticeForm">
+                                    <div class="layui-form-item layui-form-text">
+                                        <div class="layui-input-block" style="margin-left: 0;">
+                                            <textarea style="height: 500px;" id="contentMsg" name="content" placeholder="" class="layui-textarea"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button style="margin-left: 5px;" class="layui-btn pull-right" lay-submit lay-filter="*">立即提交</button>
+                                            <button type="reset" class="layui-btn pull-right layui-btn-primary">重置</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        let form = layui.form;
+        let element = layui.element;
+
+        element.render('nav');
+
+        form.on("submit(*)",function (data) {
+
+            let formdata = new FormData(noticeForm);
+            formdata.append("id",1);
+
+            fetch("/notice/update"
+                , {
+                    method: "post",
+                    body:formdata
+
+                }).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+
+                    if (data.flage) {
+
+                        layer.msg('添加成功!', {icon: 1, time: 2000});
+                    } else {
+                        layer.msg('添加失败!', {icon: 2, time: 2000});
+                    }
+                });
+            });
+            return false;
+
+        });
+
+        noticeRender();
+        function noticeRender() {
+
+            fetch("/notice/1"
+                , {
+
+                    method: "get"
+
+                }).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+
+                    contentMsg.value = data["content"];
+
+                });
+            });
+
+        }
+    </script>
+</div>
+</body>
+
+</html>

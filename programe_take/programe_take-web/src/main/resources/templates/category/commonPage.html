@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>分类页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./jquery/jquery-3.3.1.js"></script>
+    <!-- layer 依赖jquery -->
+    <script src="./layer-v3.1.1/layer/layer.js"></script>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <script src="./layui/layui.js"></script>
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/commonPage.css" />
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <div id="nav" style="background-color:#52c3dd;">
+        <div class="layui-container" style="width:1300px;">
+            <ul class="layui-nav" style="background-color:#52c3dd;" lay-filter="">
+                <li class="layui-nav-item" style="font-size:18px;"><a href="">网上论坛</a></li>
+                <li class="layui-nav-item"><a href="./main.html">首页</a></li>
+                <li class="layui-nav-item layui-this"><a href="">前端开发</a></li>
+                <li class="layui-nav-item"><a href="">后端开发</a></li>
+                <li class="layui-nav-item"><a href="">游戏开发</a></li>
+                <li class="layui-nav-item"><a href="">人工智能</a></li>
+                <li class="layui-nav-item"><a href="">公告</a></li>
+
+                <li class="layui-nav-item pull-right">
+                    <a href="">注册</a>
+                </li>
+                <li class="layui-nav-item pull-right">
+                    <a href="">登入<span class="layui-badge-dot layui-bg-orange"></span></a>
+                </li>
+
+                <!-- <li class="layui-nav-item pull-right">
+                    <a href="">个人中心<span class="layui-badge-dot"></span></a>
+                </li>
+                <li class="layui-nav-item pull-right">
+                    <a href=""><img src="./Image/1.jpg" class="layui-nav-img">我</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">在线状态</a></dd>
+                        <dd><a href="javascript:;">修改信息</a></dd>
+                        <dd><a href="javascript:;">登出</a></dd>
+                    </dl>
+                </li> -->
+
+                <li class="search-item pull-right search">
+                    <form id="searchForm" class="layui-form" style="height:38px;" action="">
+                        <div class="layui-form-item">
+                            <div class="layui-input-block search-margin">
+                                <input id="search" type="text" name="searchKey" placeholder="请输入搜索内容" autocomplete="off"
+                                    class="layui-input">
+                            </div>
+                        </div>
+                    </form>
+                    <a href="" class="layui-btn pull-right">搜索</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 内容区 -->
+    <div class="layui-container" style="width:1200px;">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md7 layui-col-md-offset1">
+                <!-- 内容区left -->
+                <div class="content-left">
+                    <ul class="list-article">
+                        <li>
+                            <!-- 头像 -->
+                            <a href="#" class="pull-left" style="display:block;">
+                                <img class="img-head" src="./Image/1.jpg" alt="">
+                            </a>
+                            <!-- 文章标题 -->
+                            <div class="article-title">
+                                <h3>
+                                    关于转生成为史莱姆的事情
+                                </h3>
+                            </div>
+                            <!-- 时间 -->
+                            <div class="article-info">
+                                <p>
+                                    <span class="author-text">唐小年</span>
+                                    <span class="time-text">2019-1-21</span>
+                                    <span class="pull-right">
+                                        <img class="img-message" src="./Image/消息.png" alt="" srcset="">
+                                        <span class="message-text">11</span>
+                                    </span>
+                                    <span class="pull-right">
+                                        <img class="img-message" src="./Image/赞.png" alt="" srcset="">
+                                        <span class="points-text">11</span>
+                                    </span>
+                                </p>
+                            </div>
+                            <hr class="layui-bg-green">
+                        </li>
+                        <li>
+                            <!-- 头像 -->
+                            <a href="#" class="pull-left" style="display:block;">
+                                <img class="img-head" src="./Image/1.jpg" alt="">
+                            </a>
+                            <!-- 文章标题 -->
+                            <div class="article-title">
+                                <h3>
+                                    关于转生成为史莱姆的事情
+                                </h3>
+                            </div>
+                            <!-- 时间 -->
+                            <div class="article-info">
+                                <p>
+                                    <span class="author-text">唐小年</span>
+                                    <span class="time-text">2019-1-21</span>
+                                    <span class="pull-right">
+                                        <img class="img-message" src="./Image/消息.png" alt="" srcset="">
+                                        <span class="message-text">11</span>
+                                    </span>
+                                    <span class="pull-right">
+                                        <img class="img-message" src="./Image/赞.png" alt="" srcset="">
+                                        <span class="points-text">11</span>
+                                    </span>
+                                </p>
+                            </div>
+                            <hr class="layui-bg-green">
+                        </li>
+                        <li>
+                            <!-- 头像 -->
+                            <a href="#" class="pull-left" style="display:block;">
+                                <img class="img-head" src="./Image/1.jpg" alt="">
+                            </a>
+                            <!-- 文章标题 -->
+                            <div class="article-title">
+                                <h3>
+                                    关于转生成为史莱姆的事情
+                                </h3>
+                            </div>
+                            <!-- 时间 -->
+                            <div class="article-info">
+                                <p>
+                                    <span class="author-text">唐小年</span>
+                                    <span class="time-text">2019-1-21</span>
+                                    <span class="pull-right">
+                                        <img class="img-message" src="./Image/消息.png" alt="" srcset="">
+                                        <span class="message-text">11</span>
+                                    </span>
+                                    <span class="pull-right">
+                                        <img class="img-message" src="./Image/赞.png" alt="" srcset="">
+                                        <span class="points-text">11</span>
+                                    </span>
+                                </p>
+                            </div>
+                            <hr class="layui-bg-green">
+                        </li>
+                    </ul>
+                    <div class="more-btn">
+                        <button class="layui-btn">加载更多...</button>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <!-- 内容区right -->
+                <div class="content-right">
+                    <fieldset class="layui-elem-field">
+                        <legend>我的基本信息</legend>
+                        <div class="layui-field-box">
+                            <p class="text-center">
+                                <img class="right-img-head" src="./Image/1.jpg" alt="">
+                            </p>
+                            <p class="text-center">
+                                <a href="">
+                                    唐小年&nbsp;&nbsp;
+                                </a>
+                                <span>102篇文章</span>
+                            </p>
+                            <p class="text-center">
+                                <a href="" class="layui-btn layui-btn-normal">个人资料</a>
+                                <a href="" class="layui-btn layui-btn-normal">后台管理</a>
+                            </p>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- go top  -->
+            <div id="go-top">
+                <a href="javascript:void(0)">
+                    <i class="layui-icon layui-icon-top"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 列表区 -->
+    <div class="programe-list">
+        <ul class="left-list">
+            <li class="layui-bg-gray">列表</li>
+            <li>html</li>
+            <li>css</li>
+            <li>js</li>
+            <li>vue</li>
+            <li>node.js</li>
+            <li>rect</li>
+        </ul>
+    </div>
+</body>
+
+</html>

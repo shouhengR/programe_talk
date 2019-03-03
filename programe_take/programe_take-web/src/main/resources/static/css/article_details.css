@@ -1,0 +1,133 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f2f2f2;
+}
+
+.content-left .article-title {
+    min-height: 100px;
+    margin-bottom: 5px;
+    background-color: #fff;
+}
+
+.article-title h2 {
+    font-weight: bold;
+    padding: 20px 5px 5px 5px;
+}
+
+.article-title .title-details {
+    margin: 8px;
+}
+
+.title-details span {
+    color: #969292;
+}
+
+.content-left .article-body {
+    color: #4f4f4f;
+    /* font-size: 16px; */
+    min-height: 500px;
+    margin-bottom: 5px;
+    background-color: #fff;
+}
+.article-body .point{
+    padding-bottom: 10px;
+}
+.point .point-style{
+    cursor: pointer;
+    font-size: 40px;
+    /* color: red; */
+}
+
+.content-left .article-commint {
+    min-height: 300px;
+    background-color: #fff;
+}
+
+.layui-container .content-right {
+    width: 100%;
+    /* min-height: 250px; */
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.content-right .author-details {
+    height: 250px;
+    margin-bottom: 5px;
+    background-color: #fff;
+}
+
+.content-right .right-img-head {
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    margin-top: 20PX;
+}
+
+.content-right p {
+    margin-top: 10PX;
+}
+.article-commint .comment-list{
+    padding: 5px;
+}
+.article-commint .comment-title{
+    font-size: 17px;
+    font-weight: bold;
+    text-align: left;
+    padding: 5px;
+}
+.ul-comment-list .left-img-head{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.ul-comment-list .comment-item{
+    display: flex;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px;
+    border-bottom: 1px solid #f2f2f2;
+}
+.author-comment-item{
+    font-size: 16px;
+}
+.comment-item .comment-item-body{
+    flex: 1;
+    padding: 5px;
+}
+.comment-item .comment-color{
+    color: #009688;
+    cursor: pointer;
+}
+.content-right .new-comment{
+    width: 100%;
+    min-height: 300px;
+    margin-top: 5px;
+    background-color: #fff;
+}
+.new-comment .new-comment-title{
+    font-size: 17px;
+    font-weight: bold;
+    padding: 5px;
+}
+.new-comment .right-ul-comment-list .comment-item{
+    display: flex;
+    padding: 5px;
+    border-bottom: 1px solid #f2f2f2;
+}
+.right-ul-comment-list .new-comment-left-img-head{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.content-right .layui-field-box{
+    padding:0px 15px 10px 15px;
+}
+.layui-elem-field legend{
+    font-size: 14px;
+}

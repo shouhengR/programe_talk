@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>mian</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <script defer th:src="@{/js/common.js}"></script>
+
+</head>
+
+<body>
+<!-- 导航栏 -->
+<div th:replace="~{/nav/main_nav :: main_nav (current='index')}"></div>
+
+<!-- 整个内容区 -->
+<div class="layui-container" style="width:1200px;">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md8">
+            <!-- 内容区left -->
+            <div id="content-left">
+                <!-- 轮播图 -->
+                <div class="loop-picture">
+                    <ul class="loop-list">
+                        <li class="live">
+                            <img src="./Image/loop/1.jpg" alt="" srcset="">
+                        </li>
+                        <li class="died">
+                            <img src="./Image/loop/2.jpg" alt="" srcset="">
+                        </li>
+                        <li class="died">
+                            <img src="./Image/loop/1.jpg" alt="" srcset="">
+                        </li>
+                        <li class="died">
+                            <img src="./Image/loop/2.jpg" alt="" srcset="">
+                        </li>
+                    </ul>
+                    <ul class="list-point">
+                        <li class="active"></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <!-- 左右箭头 -->
+                    <div class="left-dr">
+                        <i style="font-size:40px;" class="layui-icon layui-icon-left"></i>
+                    </div>
+                    <div class="right-dr">
+                        <i style="font-size:40px;" class="layui-icon layui-icon-right"></i>
+                    </div>
+                </div>
+                <!-- 置顶区 -->
+                <div class="top-max">
+                    <div class="layui-card" style="margin-bottom:0;">
+                        <div class="layui-card-header">置顶区</div>
+                    </div>
+                    <div class="top-max-content">
+                        <ul class="list-article" id="topanel">
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- 综合区 最新区 -->
+                <div class="secondBlock">
+                    <div class="layui-tab layui-tab-brief">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">综合区</li>
+                            <li>最新区</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <!-- 综合区 -->
+                            <div class="layui-tab-item layui-show">
+                                <ul class="list-article" id="sumArticle">
+                                </ul>
+                                <div class="more-btn">
+                                    <button onclick="loadMore()" class="layui-btn">加载更多</button>
+                                </div>
+                                <!--<div id="page"></div>-->
+                            </div>
+                            <!-- 最新区 -->
+                            <div class="layui-tab-item">
+                                <div class="swap-new">换一批
+                                    <i onclick="beforeBtn(newArticleForm,newArticle);" class="layui-icon layui-icon-refresh"></i>
+                                </div>
+                                <ul class="list-article" id="newArticleUl">
+                                    <li>
+                                        <!-- 头像 -->
+                                        <a href="#" class="pull-left" style="display:block;">
+                                            <img class="img-head" src="./Image/1.jpg" alt="">
+                                        </a>
+                                        <!-- 文章标题 -->
+                                        <div class="article-title">
+                                            <h3>
+                                                关于转生成为史莱姆的事情
+                                                <span class="pull-right layui-badge layui-bg-orange">new</span>
+                                            </h3>
+                                        </div>
+                                        <!-- 时间 -->
+                                        <div class="article-info">
+                                            <p>
+                                                <span class="author-text">唐小年</span>
+                                                <span class="time-text">2019-1-21</span>
+                                                <span class="">
+                                                        <img class="img-message" src="./Image/赞.png" alt="" srcset="">
+                                                        <span class="points-text">11</span>
+                                                    </span>
+                                                <span class="pull-right">
+                                                    <img class="img-message" src="./Image/消息.png" alt="" srcset="">
+                                                    <span class="message-text">11</span>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <hr class="layui-bg-green">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <!-- 内容区right -->
+            <div id="content-right">
+                <!-- 发帖区 -->
+                <div class="sendArticle text-center">
+                    <fieldset class="layui-elem-field">
+                        <legend>来一发</legend>
+                        <div class="layui-field-box">
+                            <a href="/sendArticle" class="layui-btn">
+                                <i class="layui-icon layui-icon-add-1" style="font-size: 20px;"></i>发帖
+                            </a>
+                        </div>
+                    </fieldset>
+                </div>
+                <!-- 日期区 -->
+                <div class="scrollPictrue">
+                    <h3 class="date-text text-center">当前日期</h3>
+                    <div id="date"></div>
+                </div>
+                <!-- 热议区 -->
+                <div class="hotMeeting">
+                    <div class="top-max">
+                        <div class="layui-card" style="margin-bottom:0;">
+                            <div class="layui-card-header">热议区</div>
+                        </div>
+                        <div class="top-max-content">
+                            <ul class="list-article" id="hotPanel">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- 结束区 -->
+                <!-- 底部 -->
+                <div id="footer">
+                    <div class="top-max">
+                        <div class="layui-card" style="margin-bottom:0;">
+                            <div class="layui-card-header">友情链接</div>
+                        </div>
+                        <div class="top-max-content">
+                            <p class="text-center">滁州学院</p>
+                            <p class="text-center">友情链接:&nbsp;&nbsp;
+                                <a href="https://www.layui.com/">layui</a>&nbsp;&nbsp;
+                                <a href="https://www.csdn.net/">csdn</a>&nbsp;&nbsp;
+                            </p>
+                            <p class="text-center">
+                                <a target="_blank" href="/admin/login_">后台管理</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- go top  -->
+        <div id="go-top">
+            <a href="javascript:void(0)">
+                <i class="layui-icon layui-icon-top"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<form action="" hidden="hidden" id="newArticleForm">
+    <input type="text" name="pageSize" value="5"/>
+    <input type="text" name="currentPage" value="1"/>
+    <input type="text" name="countPage" value="0">
+</form>
+
+<div th:replace="~{/search/search :: search_input}"></div>
+
+<script>
+
+    let layer = layui.layer;
+    let element = layui.element;
+
+    window.onload = function () {
+        element.render('nav');
+    };
+    // 缓存数据
+    let cacheData = [];
+
+    function dateConvert(date) {
+        return date.match(/(\d+-\d+-\d+)/)[0];
+    }
+
+    // 加载更多
+    function loadMore() {
+
+        if (!cacheData.length) {
+
+            layer.msg("到底了~~", {
+                time: 1000
+            });
+
+            return;
+        }
+
+        let i = 1;
+        let template = "";
+
+        while (cacheData.length && i <= 6) {
+
+            let item = cacheData.shift();
+
+            if (item) {
+
+                let time = dateConvert(item["createtime"]);
+
+                let hot_top = (item["topStatus"] == "1" ? "top" : item["hotStatus"] == "1" ? "hot" : "");
+
+                let hot_top_Class = null;
+                (hot_top == "top" || hot_top == "hot") && (hot_top_Class = "layui-badge");
+
+                let hot_top_Style = "";
+
+                if (hot_top){
+
+                    hot_top_Style = hot_top == "top" ? "background-color:#FFB800" : hot_top == "hot" ? "background-color:red" : "";
+                }
+
+                let temp = `<li>
+                                <a href="#" target="_blank" href="/article/user/info" class="pull-left" style="display:block;">
+                                    <img class="img-head" src="${item["user"]["headerImg"]}" alt="">
+                                </a>
+                                <!-- 文章标题 -->
+                                <div class="article-title">
+                                    <h3>
+                                        <a href="/user/article/details?uid=${item["uid"]}&aid=${item["id"]}">${item["title"]}</a>
+                                        <span class="pull-right ${hot_top_Class}" style="${hot_top_Style}">${hot_top}</span>
+                                    </h3>
+                                </div>
+                                <!-- 时间 -->
+                                <div class="article-info">
+                                    <p>
+                                        <span class="author-text">${item["user"]["username"]}</span>
+                                        <span class="time-text">${time}</span>
+                                        <span class="">
+                                            <img class="img-message" src="/Image/赞.png" alt="" srcset="">
+                                            <span class="points-text">${item["pointsNumber"]}</span>
+                                        </span>
+                                        <span class="pull-right">
+                                            <img class="img-message" src="/Image/消息.png" alt="" srcset="">
+                                            <span class="message-text">${item["commentNumber"]}</span>
+                                        </span>
+                                    </p>
+                                </div>
+                                <hr class="layui-bg-green">
+                              </li>`;
+
+                template += temp;
+            }
+            i++;
+        }
+        sumArticle.innerHTML += template;
+
+    }
+
+    //置顶区  最多显示5篇文章
+    topArticle();
+    // 置顶文章的数据接口
+    function topArticle() {
+
+        fetch("/top/all", {
+
+            method: "get"
+
+        }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                let template = "";
+
+                data["list"].length >= 5 && (data["list"].length = 5);
+
+                for (let item of data["list"]) {
+
+                    let time = dateConvert(item["time"]);
+
+                    let temp = `<li>
+                                <a class="pull-left" href="/article/user/info/${item["uid"]}" target="_blank" style="display:block;">
+                                    <img class="img-head" src="${item["user"]["headerImg"]}" alt="">
+                                </a>
+
+                                <div class="article-title">
+                                    <h3><a href="/user/article/details?uid=${item["uid"]}&aid=${item["aid"]}">
+                                            ${item["article"]["title"]}
+                                        </a>
+                                        <span class="layui-badge">精华</span>
+                                    </h3>
+                                </div>
+
+                                <div class="article-info">
+                                    <p>
+                                        <span class="author-text">${item["user"]["username"]}</span>
+                                        <span class="time-text">${time}</span>
+                                        <span class="">
+                                            <img class="img-message" src="./Image/赞.png" alt="" srcset="">
+                                            <span class="points-text">${item["article"]["pointsNumber"]}</span>
+                                        </span>
+                                        <span class="pull-right">
+                                            <img class="img-message" src="./Image/消息.png" alt="" srcset="">
+                                            <span class="message-text">${item["article"]["commentNumber"]}</span>
+                                        </span>
+                                    </p>
+                                </div>
+                                <hr class="layui-bg-green">
+                                </li>`;
+                    <!--用户id  文章id-->
+                    template += temp;
+                }
+
+                topanel.innerHTML = template;
+
+            })
+        });
+    }
+
+    hotArticle();
+    // 调用热门文章的接口
+    function hotArticle() {
+
+        fetch("/hot/all"
+            , {
+
+                method: "get"
+
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                let template = "";
+
+                data["list"].length >= 10 && (data["list"].length = 10);
+
+                for (let item of data["list"]) {
+
+                    let time = dateConvert(item["time"]);
+
+                    let temp = `<li>
+                                    <a href="/user/article/details?uid=${item["uid"]}&aid=${item["id"]}">
+                                        ${item["article"]["title"]}
+                                    </a>
+                                    <span class="points-text pull-right">
+                                        ${item["article"]["commentNumber"]}
+                                    </span>
+                                    <img class="img-message pull-right" src="./Image/消息.png" alt="" srcset="">
+                                </li>`;
+                    <!--用户id  文章id-->
+                    template += temp;
+                }
+                hotPanel.innerHTML = template;
+
+            });
+        });
+
+    }
+
+    allArticle();
+    // 所有文章   综合区
+    function allArticle() {
+
+        fetch("/article/all"
+            , {
+
+                method: "get"
+
+            }).then((response) => {
+
+            response.json().then((data) => {
+
+                console.log(data);
+
+                //缓存数据
+
+                let i = 1;
+                let template = "";
+                while (data.length && i <= 6) {
+
+                    let item = data.shift();
+
+                    if (item) {
+
+                        let time = dateConvert(item["createtime"]);
+
+                        let hot_top = (item["topStatus"] == "1" ? "top" : item["hotStatus"] == "1" ? "hot" : "");
+
+                        let hot_top_Class = null;
+                        (hot_top == "top" || hot_top == "hot") && (hot_top_Class = "layui-badge");
+
+                        let hot_top_Style = "";
+
+                        if (hot_top){
+
+                            hot_top_Style = hot_top == "top" ? "background-color:#FFB800" : hot_top == "hot" ? "background-color:red" : "";
+                        }
+
+                        let temp = `<li>
+                                    <a href="/article/user/info/${item["uid"]}" target="_blank"  class="pull-left" style="display:block;">
+                                        <img class="img-head" src="${item["user"]["headerImg"]}" alt="">
+                                    </a>
+                                    <!-- 文章标题 -->
+                                    <div class="article-title">
+                                        <h3>
+                                            <a href="/user/article/details?uid=${item["uid"]}&aid=${item["id"]}">${item["title"]}</a>
+                                            <span class="pull-right ${hot_top_Class}" style="${hot_top_Style}">${hot_top}</span>
+                                        </h3>
+                                    </div>
+                                    <!-- 时间 -->
+                                    <div class="article-info">
+                                        <p>
+                                            <span class="author-text">${item["user"]["username"]}</span>
+                                            <span class="time-text">${time}</span>
+                                            <span class="">
+                                                <img class="img-message" src="./Image/赞.png" alt="" srcset="">
+                                                <span class="points-text">${item["pointsNumber"]}</span>
+                                            </span>
+                                            <span class="pull-right">
+                                                <img class="img-message" src="./Image/消息.png" alt="" srcset="">
+                                                <span class="message-text">${item["commentNumber"]}</span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <hr class="layui-bg-green"></li>`;
+
+                        template += temp;
+                    }
+                    i++;
+                }
+                sumArticle.innerHTML = template;
+                cacheData = data;
+            })
+        });
+    }
+
+    layui.use(['element', 'form', 'laypage', 'laydate'], function () {
+        let element = layui.element;
+        let laypage = layui.laypage;
+        let laydate = layui.laydate;
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'page', //注意，这里的 test1 是 ID，不用加 # 号
+            count: 50 //数据总数，从服务端得到
+        });
+        laydate.render({
+            theme: "grid",
+            elem: '#date', //指定元素
+            show: true,
+            trigger: "click",
+            position: "static",
+            btns: ['clear', 'now']
+        });
+    });
+    // 轮播图
+    ;
+    (function () {
+
+        let loopList = document.querySelector(".loop-list");
+        let aLi = Array.prototype.slice.call(loopList.children);
+        let aPoint = document.querySelector(".list-point").children;
+        let left = document.querySelector(".left-dr");
+        let right = document.querySelector(".right-dr");
+        let index = 0,
+            time = null;
+
+        let handler = function (k = 1) {
+
+            aLi[index].classList.remove("live");
+            aLi[index].classList.add("died");
+            aPoint[index].classList.remove("active");
+
+            index += k;
+            index = index < 0 ? index + aLi.length : index;
+            index %= aLi.length;
+
+            aPoint[index].classList.add("active");
+            aLi[index].classList.remove("died");
+            aLi[index].classList.add("live");
+
+        };
+
+        time = setInterval(handler, 3000);
+
+        loopList.onmouseover = function () {
+            clearInterval(time);
+        };
+
+        loopList.onmouseout = function () {
+            time = setInterval(handler, 3000);
+        };
+
+        left.onclick = function (ev) {
+            handler();
+        };
+
+        right.onclick = function (ev) {
+            handler(-1);
+        };
+    })();
+
+    // 最新文章
+    function newArticle() {
+
+        fetch("/article/new/all?currentPage="+newArticleForm["currentPage"].value
+            +"&pageSize="+newArticleForm["pageSize"].value
+            , {
+
+                method: "get"
+
+            }).then((response) => {
+
+                response.json().then((data) => {
+
+                console.log(data);
+
+                let template = "";
+
+                for (let item of data["list"]) {
+
+                    if (item) {
+
+                        let time = dateConvert(item["createtime"]);
+
+                        let temp = `<li>
+                                    <a href="/article/user/info/${item["uid"]}" target="_blank" class="pull-left" style="display:block;">
+                                        <img class="img-head" src="${item["user"]["headerImg"]}" alt="">
+                                    </a>
+                                    <!-- 文章标题 -->
+                                    <div class="article-title">
+                                        <h3>
+                                            <a href="/user/article/details?uid=${item["uid"]}&aid=${item["id"]}">${item["title"]}</a>
+                                            <span class="pull-right layui-badge layui-bg-orange">new</span>
+                                        </h3>
+                                    </div>
+                                    <!-- 时间 -->
+                                    <div class="article-info">
+                                        <p>
+                                            <span class="author-text">${item["user"]["username"]}</span>
+                                            <span class="time-text">${time}</span>
+                                            <span class="">
+                                                <img class="img-message" src="./Image/赞.png" alt="" srcset="">
+                                                <span class="points-text">${item["pointsNumber"]}</span>
+                                            </span>
+                                            <span class="pull-right">
+                                                <img class="img-message" src="./Image/消息.png" alt="" srcset="">
+                                                <span class="message-text">${item["commentNumber"]}</span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <hr class="layui-bg-green">
+                                    </li>`;
+
+                        template += temp;
+                    }
+                }
+
+                newArticleUl.innerHTML = template;
+
+                newArticleForm["countPage"].value = data["countPage"];
+
+            })
+        });
+    }
+
+    //后一页
+    function beforeBtn(form, fun) {
+
+        console.log(form);
+
+        let currentPage = form["currentPage"].value;
+
+        if (currentPage == form["countPage"].value){
+
+            form["currentPage"].value = 1;
+
+            layer.msg("回到了第一页~~",{
+                time:1000
+            });
+
+            fun();
+
+            return;
+        }
+
+        form["currentPage"].value = (currentPage - '0') + 1;
+
+        fun();
+    }
+
+
+    newArticle();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>文章详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/Backstage/common.css}">
+    <link rel="stylesheet" th:href="@{/css/self.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <script th:src="@{/js/common.js}"></script>
+
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <div th:replace="~{/nav/main_nav :: main_nav (current='backend-dev')}"></div>
+    <!-- 整个内容区 -->
+    <div class="layui-container" style="width:1200px;">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md10">
+                <div class="content-main">
+                    <br/>
+                    <div class="layui-card">
+                        <div class="layui-card-header self-title">他的简介:</div>
+                        <div class="layui-card-body">
+                            <div class="selft_content">
+                                <div class="self_left">
+                                    <img th:src="${user.headerImg}" alt="">
+                                </div>
+                                <div class="self_right">
+                                    <ul class="self_right_ul">
+                                        <li><span>姓名:</span>[[${user.username}]]</li>
+                                        <li><span>年龄:</span>[[${user.age}]]</li>
+                                        <li><span>性别:</span>[[${user.sex == '0' ? '男' : '女'}]]</li>
+                                        <li><span>电话:</span>[[${user.phone}]]</li>
+                                        <li><span>文章总数:</span>[[${user.articleCount}]]</li>
+                                        <li><span>加入时间:</span>[[${#dates.format(user.jointime)}]]</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="self_bottom">
+                                <div class="self_title_one">他的文章:
+                                    <div class="self_article">
+                                        <ul class="self_title_article">
+                                            <li th:each="item:${articles}">
+
+                                                <img src="/Image/阅读.png" alt="">
+                                                    <a th:href="@{/user/article/details(aid=${item.id},uid=${item.uid})}">[[${item.title}]]</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="self_title_two">他的简介:
+                                    <div class="self_content_desc">
+                                        [[${user.desc == '' ? '这个家伙很懒,什么都没有留下...' : user.desc}]]
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- go top  -->
+    <div id="go-top">
+        <a href="javascript:void(0)">
+            <i class="layui-icon layui-icon-top"></i>
+        </a>
+    </div>
+    <div th:replace="~{/search/search :: search_input}"></div>
+</body>
+
+</html>

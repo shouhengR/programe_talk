@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/programe_take.iml" filepath="$PROJECT_DIR$/programe_take.iml" />
+      <module fileurl="file://$PROJECT_DIR$/programe_take-base/programe_take-base.iml" filepath="$PROJECT_DIR$/programe_take-base/programe_take-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/programe_take-dao/programe_take-dao.iml" filepath="$PROJECT_DIR$/programe_take-dao/programe_take-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/programe_take-service/programe_take-service.iml" filepath="$PROJECT_DIR$/programe_take-service/programe_take-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/programe_take-web/programe_take-web.iml" filepath="$PROJECT_DIR$/programe_take-web/programe_take-web.iml" />
+    </modules>
+  </component>
+</project>

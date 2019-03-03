@@ -1,0 +1,193 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #f2f2f2;
+}
+.layui-container #content-left{
+    /* background-color: aqua; */
+    min-height: calc(100vh - 75px);
+    padding-top: 5px;
+}
+.layui-container #content-right{
+    /*background-color: bisque;*/
+    min-height: calc(100vh - 75px);
+    padding-top: 10px;
+}
+
+#content-left .top-max{
+    min-height: 400px;
+    margin: 5px;
+    background-color: #ffff;
+}
+.top-max .top-max-content{
+    padding: 5px;
+}
+#content-left .loop-picture{
+    position: relative;
+    left: 0;
+    height: 200px;
+    background-color: #ffff;
+    margin: 5px;
+    padding: 20px;
+}
+#content-left .secondBlock{
+    position: relative;
+    min-height: 500px;
+    background-color: #ffff;
+    margin: 5px;
+}
+
+.top-max .list-article .img-head,.secondBlock .list-article .img-head{
+    width: 50px;
+    height: 50px;
+}
+.list-article .article-title{
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0 0 3px 10px;
+    overflow: hidden;
+}
+
+.list-article .article-title:hover{
+    color: #52c3dd;
+}
+
+.list-article .article-info{
+    cursor: pointer;
+    padding-left: 10px;
+    overflow: hidden;
+}
+.secondBlock li{
+    overflow: hidden;
+}
+.secondBlock .more-btn{
+    text-align: center;
+}
+.secondBlock .swap-new{
+    cursor: pointer;
+    text-align: right;
+    clear: both;
+    color: #8e8c8c;
+    margin: 0 0 10px 0;
+}
+.time-text,.author-text,.message-text,.points-text{
+    color:#5a5652;
+    margin-right: 5px;
+}
+#page{
+    text-align: center;
+    position: absolute;
+    bottom: 0;left: 0;right: 0;
+}
+
+.loop-picture .loop-list{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.loop-list li{
+    position: absolute;
+    left: 0;top: 0;
+    bottom: 0;right: 0;
+    width: 100%;
+    height: 100%;
+}
+.loop-list img{
+   display: block;
+   width: 100%;
+   height: 100%;
+}
+.loop-picture .list-point{
+    position: relative;
+    display: flex;
+    top: -10px;
+    justify-content: center;
+    width: 100%;
+}
+.list-point li{
+    margin: 0 5px;
+    width: 40px;
+    height: 1px;
+    border: 1px solid #ffff;
+}
+.loop-picture .left-dr{
+    position: absolute;
+    top: 100px;
+    left: 20px;
+}
+.loop-picture .right-dr{
+    position: absolute;
+    top: 100px;
+    left: 710px;
+}
+#content-right .sendArticle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    background-color: #ffff;
+}
+.sendArticle fieldset{
+    width: 100%;
+    height: 100%;
+}
+.layui-elem-field legend{
+    font-size: 14px;
+    color: #788080;
+}
+#content-right .scrollPictrue{
+    width: 100%;
+    background-color: #ffff;
+    margin-bottom: 10px;
+}
+
+#content-right #layui-laydate1,.scrollPictrue #layui-laydate1 .layui-laydate-main{
+    width: 100%;
+}
+#content-right .layui-laydate-content{
+    display: flex;
+    justify-content: center;
+}
+
+#content-right .date-text{
+    margin: 5px;
+    font-weight: bold;
+    color: #808484;
+}
+#content-right .hotMeeting{
+    width: 100%;
+    background-color: #ffff;
+    min-height: 300px;
+    margin-bottom: 10px;
+}
+.hotMeeting li{
+    margin: 5px;
+    border-bottom: 1px solid #d6cdc3;
+}
+#footer{
+    /* text-align: center; */
+    height: 300px;
+    background-color: #ffff;
+}
+#footer .top-max-content p{
+    margin: 10px;
+}
+#go-top{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    background-color:#e6eaef00;
+}
+#go-top i{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: 50px;
+}

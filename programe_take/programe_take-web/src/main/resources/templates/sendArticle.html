@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>发帖页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script th:src="@{/jquery/jquery-3.3.1.js}"></script>
+    <!-- layer 依赖jquery -->
+    <script th:src="@{/layer-v3.1.1/layer/layer.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/sendArticle.css}"/>
+
+    <script defer th:src="@{/js/common.js}"></script>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <div th:replace="~{/nav/main_nav :: main_nav (current='index')}"></div>
+    <!-- 整个内容区 -->
+    <div class="layui-container" style="width:1200px;">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md12">
+                <div class="content">
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">发帖</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">
+                                <form id="sendForm" class="layui-form layui-form-pane" lay-filter="form">
+                                    <!-- 标题 -->
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">标题</label>
+                                        <div class="layui-input-inline">
+                                            <input class="layui-input article-title-input" type="text" name="title" required lay-verify="required" placeholder="请输入文章标题"
+                                                autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <!-- 类别 -->
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">文章类别</label>
+                                        <div class="layui-input-block">
+                                            <select id="category" name="cid" lay-verify="required">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- 文章体 -->
+                                    <div class="layui-form-item layui-form-text">
+                                        <label class="layui-form-label">描述域</label>
+                                        <div id="editor" class="layui-input-block">
+                                            <p>在此详细描述...</p>
+                                        </div>
+                                        <input type="file" hidden id="upload"/>
+                                    </div>
+                                    <!-- 发布按钮 -->
+                                    <div class="layui-form-item text-right">
+                                        <div class="layui-input-block">
+                                            <button lay-filter="*" lay-submit class="layui-btn layui-btn-normal">开始发布</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{/search/search :: search_input}"></div>
+
+    <script type="text/javascript" src="./js/wangEditor/wangEditor.js"></script>
+    <script>
+
+        let E = window.wangEditor;
+        let editor_ = new E('#editor');
+        //  创建文本编译器
+        editor_.create();
+
+        let form = layui.form;
+        let layer = layui.layer;
+        let element = layui.element;
+
+        element.render('nav');
+
+        function edit() {
+
+            let firstChild = editor.firstElementChild;
+            let lastChild = editor.lastElementChild;
+            let textarea = lastChild.firstElementChild;
+            let childrens = firstChild.children;
+            lastChild.style.zIndex = 1;
+            // 添加自定义的
+            childrens[14].innerHTML = '<i id="picture" class="w-e-icon-image"></i>';
+
+            picture.parentNode.onclick = function(){
+                upload.click();
+            };
+
+            //文件上传
+            upload.onchange = function(event){
+
+                let file = upload.files[0];
+                // 文件上传 返回路径
+
+                let formData = new FormData();
+
+                formData.append("file",file);
+
+                fetch("/uploadFile",{
+                    method:"Post",
+                    body:formData
+                }).then((response)=>{
+                    response.text().then((data)=>{
+                        // console.log(data);
+                        // 追加到文本域里面
+                        let img = new Image(300,300);
+                        img.src = data;
+                        img.onload = function(){
+                            textarea.appendChild(this);
+                        }
+                    })
+                })
+            };
+        }
+        edit();
+
+        //提交文章
+        function sendArticle() {
+
+            form.on("submit(*)",function (data) {
+
+                console.log(editor_.txt.html());
+
+                let contentForm = new FormData(sendForm);
+
+                contentForm.append("content",editor_.txt.html());
+
+                fetch("/article/add",{
+
+                    method:"post",
+
+                    body:contentForm
+
+                }).then((response)=>{
+
+                    response.json().then((data)=>{
+
+                       if (data.flage){
+
+                           layer.alert("发帖成功，请等待审核！",{
+                               icon:1
+                           },function (index) {
+                               //   清空内容
+                               sendForm.reset();
+                               editor_.txt.clear();
+                               //关闭弹窗
+                               layer.close(index);
+
+                           });
+                       }else {
+                           layer.alert(data.msg,{
+                               icon:2
+                           },function (index) {
+                               //关闭弹窗
+                               layer.close(index);
+                           });
+                       }
+
+                    });
+                });
+
+                return false;
+            });
+
+
+        }
+        sendArticle();
+        //   请求分类数据
+        function getCategory() {
+
+            fetch("/category").then((response)=>{
+
+                response.json().then((data)=>{
+
+                    for(let key in data){
+
+                        let option = new Option(data[key]["name"],key,false,false);
+
+                        category.add(option);
+                    }
+                    form.render();
+                });
+            })
+        }
+        getCategory();
+    </script>
+</body>
+
+</html>

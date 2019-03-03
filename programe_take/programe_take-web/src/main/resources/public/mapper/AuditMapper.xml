@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang.Dao.AuditDao">
+
+    <insert id="addAudit" parameterType="Audit" useGeneratedKeys="true" keyProperty="id">
+        insert into audittable value (null,#{uid},#{aid},#{status},#{adminMessage},#{auditTime})
+    </insert>
+
+    <resultMap id="auditMap" type="audit">
+
+        <id property="id" column="t_id"/>
+        <result property="uid" column="u_id"/>
+        <result property="aid" column="a_id"/>
+        <result property="status" column="t_status"/>
+        <result property="adminMessage" column="adminMessage"/>
+        <result property="auditTime" column="auditTime"/>
+
+        <association property="article" javaType="Article">
+
+            <id property="id" column="a_id"/>
+            <result property="title" column="title"/>
+
+            <association property="category" javaType="Category">
+                <result property="id" column="c_id"/>
+                <result property="name" column="name"/>
+            </association>
+
+        </association>
+
+        <association property="user" javaType="User">
+
+            <id property="id" column="u_id"/>
+            <result property="username" column="username"/>
+
+        </association>
+
+    </resultMap>
+
+    <select id="selectAllAudit" resultMap="auditMap">
+        SELECT t.id as t_id,title,`name`,username,t.status as t_status,adminMessage,auditTime,u.id as u_id,a.id as a_id,c.id as c_id
+        from article a,audittable t,`user` u,category c
+        WHERE a.id = t.aid and u.id = t.uid and a.cid = c.id and t.status = 0 limit #{start},5
+    </select>
+
+    <select id="selectByUserId" resultMap="auditMap">
+          SELECT t.id as t_id,title,`name`,username,t.status as t_status,adminMessage,auditTime,u.id as u_id,a.id as a_id,c.id as c_id
+          from article a,audittable t,`user` u,category c
+          WHERE a.id = t.aid and u.id = t.uid and t.uid = #{uid} and a.cid = c.id ORDER BY auditTime desc limit #{start},5
+    </select>
+
+</mapper>
