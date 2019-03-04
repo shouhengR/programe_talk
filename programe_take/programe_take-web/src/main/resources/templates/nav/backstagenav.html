@@ -10,7 +10,7 @@
 <div th:fragment="backstagenav" id="nav" style="background-color: #393D49;">
     <div style="background-color: #393D49;">
         <ul class="layui-nav" lay-filter="">
-            <li class="layui-nav-item" style="font-size:18px;"><a href="">网上论坛</a></li>
+            <li class="layui-nav-item" style="font-size:18px;"><a href="/">网上论坛</a></li>
             <li class="layui-nav-item pull-right">
                 <a href="">
                     <img th:src=" ${session.user} ? ${session.user.headerImg} : '/Image/admin.jpg' " class="layui-nav-img">

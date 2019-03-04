@@ -20,7 +20,8 @@
 
 <body>
 <!-- 导航栏 -->
-<div th:replace="~{/nav/main_nav :: main_nav (current='index')}"></div>
+<div th:replace="~{/nav/main_nav_1 :: main_nav_one}"></div>
+<div th:replace="~{/nav/main_nav_1 :: main_nav_two (current='index')}"></div>
 
 <!-- 整个内容区 -->
 <div class="layui-container" style="width:1200px;">
@@ -371,7 +372,7 @@
                     let time = dateConvert(item["time"]);
 
                     let temp = `<li>
-                                    <a href="/user/article/details?uid=${item["uid"]}&aid=${item["id"]}">
+                                    <a href="/user/article/details?uid=${item["uid"]}&aid=${item["aid"]}">
                                         ${item["article"]["title"]}
                                     </a>
                                     <span class="points-text pull-right">
@@ -619,7 +620,6 @@
 
         fun();
     }
-
 
     newArticle();
 </script>

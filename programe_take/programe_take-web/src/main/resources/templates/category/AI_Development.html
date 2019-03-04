@@ -20,7 +20,8 @@
 
 <body>
 <!-- 导航栏 -->
-<div th:replace="~{/nav/main_nav :: main_nav (current='ai-dev')}"></div>
+<div th:replace="~{/nav/main_nav_1 :: main_nav_one}"></div>
+<div th:replace="~{/nav/main_nav_1 :: main_nav_two (current='ai-dev')}"></div>
 <!-- 内容区 -->
 <div class="layui-container" style="width:1200px;">
     <div class="layui-row layui-col-space10">
@@ -81,13 +82,12 @@
 <!-- 列表区 -->
 <div class="programe-list">
     <ul class="left-list">
-        <li class="layui-bg-gray">列表</li>
-        <li>Python</li>
-        <li>Lisp</li>
-        <li>Prolog</li>
-        <li>Yigo</li>
-        <li>C++</li>
-        <li>Java</li>
+        <li data-title="Python">Python</li>
+        <li data-title="lisp">Lisp</li>
+        <li data-title="Prolog">Prolog</li>
+        <li data-title="Yigo">Yigo</li>
+        <li data-title="c++">C++</li>
+        <li data-title="java">Java</li>
     </ul>
 </div>
 
@@ -98,6 +98,35 @@
     let element = layui.element;
 
     element.render('nav');
+
+    // 列表区的事件绑定
+    let list = document.querySelector('.left-list');
+
+    list.onclick = function (event) {
+
+        let title = event.target.dataset.title;
+
+        if (title){
+
+            fetch("/article/category/4/"+title
+                , {
+
+                    method: "get"
+
+                }).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+                    categoryArticle.innerHTML = "";
+                    resultHandler(data);
+
+                });
+            });
+
+        }
+
+    };
 
     function updateCategoryVisitNumber() {
 
@@ -233,7 +262,7 @@
                 }
 
                 let temp = `<li>
-                                    <a href="#" class="pull-left" style="display:block;">
+                                    <a href="/article/user/info/${item["uid"]}" target="_blank" class="pull-left" style="display:block;">
                                         <img class="img-head" src="${item["user"]["headerImg"]}" alt="">
                                     </a>
                                     <!-- 文章标题 -->

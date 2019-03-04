@@ -59,6 +59,10 @@
         select * from article a,category c,`user` u where cid = #{id} and u.id = uid and status = 1
     </select>
 
+    <select id="selectByCategoryIdAndTitle" resultMap="selectPageResultMap">
+        select * from article a,category c,`user` u where title like "%${title}%" and a.cid = c.id and a.cid = #{cid} and u.id = a.uid and a.status = 1
+    </select>
+
     <select id="selectArticleById" resultMap="selectPageResultMap">
         <!--<include refid="formTable">-->
             <!--<property name="table_name" value="article"/>-->

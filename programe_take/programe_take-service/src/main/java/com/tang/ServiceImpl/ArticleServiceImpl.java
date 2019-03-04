@@ -273,4 +273,9 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.adminArticleDetails(aid);
     }
 
+    @Override
+    public List<Article> selectByCategoryIdAndTitle(Integer cid, String title) {
+        return articleDao.selectByCategoryIdAndTitle(cid,title);
+    }
+
 }

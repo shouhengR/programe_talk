@@ -340,6 +340,15 @@ public class ArticleController {
 
     }
 
+    @GetMapping("/article/category/{cid}/{title}")
+    @ResponseBody
+    public List<Article> selectByCategoryIdAndTitle(@PathVariable("cid") Integer cid,
+                                                    @PathVariable("title") String title) {
+
+        return articleServiceImpl.selectByCategoryIdAndTitle(cid,title);
+
+    }
+
     //  统计 最热门的文章
     @GetMapping("/article/sum/hot")
     @ResponseBody

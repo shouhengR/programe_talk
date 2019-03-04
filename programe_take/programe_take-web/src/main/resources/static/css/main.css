@@ -191,3 +191,7 @@ body{
     height: 100%;
     font-size: 50px;
 }
+
+#main_nav_two ul li a{
+    color: #333;
+}

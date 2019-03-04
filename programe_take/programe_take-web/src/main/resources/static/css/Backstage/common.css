@@ -13,11 +13,11 @@
     width: auto;
 }
 #searchForm input{
-    background-color: #52c3dd;
+    /*background-color: #52c3dd;*/
     color: #ffff;
 }
 .search-item a{
-    background-color: #52c3dd;
+    /*background-color: #52c3dd;*/
     border: 1px solid #ffff;
 }
 

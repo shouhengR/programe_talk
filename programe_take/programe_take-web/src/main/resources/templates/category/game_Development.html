@@ -20,7 +20,8 @@
 
 <body>
 <!-- 导航栏 -->
-<div th:replace="~{/nav/main_nav :: main_nav (current='game-dev')}"></div>
+<div th:replace="~{/nav/main_nav_1 :: main_nav_one}"></div>
+<div th:replace="~{/nav/main_nav_1 :: main_nav_two (current='game-dev')}"></div>
 <!-- 内容区 -->
 <div class="layui-container" style="width:1200px;">
     <div class="layui-row layui-col-space10">
@@ -82,11 +83,11 @@
 <div class="programe-list">
     <ul class="left-list">
         <li class="layui-bg-gray">列表</li>
-        <li>c++</li>
-        <li>Unity</li>
-        <li>Cocos-2d</li>
-        <li>Unity-3D</li>
-        <li>3DMax</li>
+        <li data-title="C++">c++</li>
+        <li data-title="Unity">Unity</li>
+        <li data-title="Cocos">Cocos-2d</li>
+        <li data-title="Unity">Unity-3D</li>
+        <li data-title="3DMax">3DMax</li>
     </ul>
 </div>
 
@@ -97,6 +98,39 @@
     let element = layui.element;
 
     element.render('nav');
+
+    // 列表区的事件绑定
+    let list = document.querySelector('.left-list');
+
+    list.onclick = function (event) {
+
+        console.log(event.target);
+
+        let title = event.target.dataset.title;
+
+        console.log(title);
+
+        if (title){
+
+            fetch("/article/category/3/"+title
+                , {
+
+                    method: "get"
+
+                }).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+                    categoryArticle.innerHTML = "";
+                    resultHandler(data);
+
+                });
+            });
+
+        }
+
+    };
     // // 后台管理按钮
     // let backMake = document.getElementById('backMake');
     //
@@ -232,7 +266,7 @@
                 }
 
                 let temp = `<li>
-                                    <a href="#" class="pull-left" style="display:block;">
+                                    <a href="#"href="/article/user/info/${item["uid"]}" target="_blank" class="pull-left" style="display:block;">
                                         <img class="img-head" src="${item["user"]["headerImg"]}" alt="">
                                     </a>
                                     <!-- 文章标题 -->

@@ -20,7 +20,8 @@
 
 <body>
 <!-- 导航栏 -->
-<div th:replace="~{/nav/main_nav :: main_nav (current='front-dev')}"></div>
+<div th:replace="~{/nav/main_nav_1 :: main_nav_one}"></div>
+<div th:replace="~{/nav/main_nav_1 :: main_nav_two (current='front-dev')}"></div>
 <!-- 内容区 -->
 <div class="layui-container" style="width:1200px;">
     <div class="layui-row layui-col-space10">
@@ -80,13 +81,12 @@
 <!-- 列表区 -->
 <div class="programe-list">
     <ul class="left-list">
-        <li class="layui-bg-gray">列表</li>
-        <li>html</li>
-        <li>css</li>
-        <li>js</li>
-        <li>vue</li>
-        <li>node.js</li>
-        <li>rect</li>
+        <li data-title="HTML">HTML</li>
+        <li data-title="CSS">CSS</li>
+        <li data-title="js">JavaScript</li>
+        <li data-title="Vue">Vue</li>
+        <li data-title="Node">Node.js</li>
+        <li data-title="Rect">Rect</li>
     </ul>
 </div>
 
@@ -134,6 +134,39 @@
     //     });
     //
     // }
+
+    // 列表区的事件绑定
+    let list = document.querySelector('.left-list');
+
+    list.onclick = function (event) {
+
+        console.log(event.target);
+
+        let title = event.target.dataset.title;
+
+        console.log(title);
+
+        if (title){
+
+            fetch("/article/category/1/"+title
+                , {
+
+                    method: "get"
+
+                }).then((response) => {
+
+                response.json().then((data) => {
+
+                    console.log(data);
+                    categoryArticle.innerHTML = "";
+                    resultHandler(data);
+
+                });
+            });
+
+        }
+
+    };
 
     function dateConvert(date) {
         return date.match(/(\d+-\d+-\d+)/)[0];
@@ -232,10 +265,10 @@
                 }
 
                 let temp = `<li>
-                                    <a href="#" class="pull-left" style="display:block;">
+                                    <a href="/article/user/info/${item["uid"]}" target="_blank" class="pull-left" style="display:block;">
                                         <img class="img-head" src="${item["user"]["headerImg"]}" alt="">
                                     </a>
-                                    <!-- 文章标题 -->
+                                                                 <!-- 文章标题 -->
                                 <div class="article-title">
                                 <h3>
                                 <a href="/user/article/details?uid=${item["uid"]}&aid=${item["id"]}">${item["title"]}</a>

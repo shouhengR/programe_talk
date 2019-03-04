@@ -22,8 +22,9 @@
 <body>
     <!-- 导航栏 -->
 
-    <div th:replace="~{/nav/main_nav :: main_nav (current='index')}"></div>
-
+    <!--<div th:replace="~{/nav/main_nav :: main_nav (current='index')}"></div>-->
+    <div th:replace="~{/nav/main_nav_1 :: main_nav_one}"></div>
+    <div th:replace="~{/nav/main_nav_1 :: main_nav_two (current='11')}"></div>
     <!-- 整个内容区 -->
     <div class="layui-container">
         <div class="layui-row layui-col-space10">

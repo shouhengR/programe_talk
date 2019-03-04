@@ -138,22 +138,43 @@ window.onscroll = function (e) {
 
     let top = document.documentElement.scrollTop;
 
-    console.log(top);
-
     if (top-40 >= 0) {
 
-        nav.style.position = "fixed";
-        nav.style.top = "0";
-        nav.style.right = "0";
-        nav.style.left = "0";
-        nav.style.zIndex = "2";
+        main_nav_two.style.position = "fixed";
+        main_nav_two.style.top = "0";
+        main_nav_two.style.right = "0";
+        main_nav_two.style.left = "0";
+        main_nav_two.style.zIndex = "2";
+
+        main_nav_two.style.backgroundColor="#393d49";
+        main_nav_two_ul.style.backgroundColor="#393d49";
+
+        [...main_nav_two_ul.children].slice(0,6).forEach((item)=>{
+            item.children[0].style.color = "#ffffff";
+        });
+
+        searchBtn.style.border = "none";
+
 
         searchPanel.style.position = "fixed";
         searchPanel.style.top="60px";
-        searchPanel.style.left = "1155px";
+        searchPanel.style.left = "1295px";
 
     } else {
-        nav.style.position = "relative";
-        nav.style.top = "0";
+        main_nav_two.style.position = "relative";
+        main_nav_two.style.top = "0";
+
+        main_nav_two.style.backgroundColor="#ffffff";
+        main_nav_two_ul.style.backgroundColor="#ffffff";
+
+        searchBtn.style.border = "1px solid #ffff;";
+
+        [...main_nav_two_ul.children].slice(0,6).forEach((item)=>{
+            item.children[0].style.color = "#333";
+        });
+
+        searchPanel.style.position = "fixed";
+        searchPanel.style.top="110px";
+        searchPanel.style.left = "1293px";
     }
 };

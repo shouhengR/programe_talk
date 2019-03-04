@@ -13,11 +13,10 @@
     width: auto;
 }
 #searchForm input{
-    background-color: #52c3dd;
-    color: #ffff;
+    font-weight: bold;
+    color: #333;
 }
 .search-item a{
-    background-color: #52c3dd;
     border: 1px solid #ffff;
 }
 
@@ -87,12 +86,12 @@
 
 .searchPanel{
     position: fixed;
-    left: 1155px;
-    /*left: 1077px;*/
-    top: 5%;
+    left: 1293px;
+    top: 110px;
     width: 278px;
     background-color: #ffffffd6;
     border-radius: 3%;
+    z-index: 20;
 }
 .searchPanel li{
     cursor: pointer;
@@ -100,4 +99,9 @@
     font-size: 14px;
     padding: 7px;
     border: 1px solid #3333;
+}
+
+
+#main_nav_two ul li a{
+    color: #333;
 }

@@ -66,7 +66,7 @@
                         <p>
                             <span><i class="layui-icon layui-icon-log"></i>[[${#dates.format(session.user.jointime,'yyyy年MMMdd日')}]]加入</span>
                             &nbsp;&nbsp;&nbsp;
-                            <span><i class="layui-icon layui-icon-male"></i>性别:[[${session.user.sex == 0} ? '男' : '女']]</span>
+                            <span><i class="layui-icon layui-icon-male"></i>性别:[[${session.user.sex == '0' ? '男' : '女'}]]</span>
                         </p>
                         <div class="detail text-center">
                             简介:
@@ -393,6 +393,7 @@
                     case 0:
                         break;
                     case 1:
+
                         myArticle();
                         break;
                     case 2:
@@ -465,6 +466,13 @@
         });
 
     })();
+
+    ~function () {
+        tabTitle[0].onclick = myArticle;
+        tabTitle[1].onclick = myRepeat;
+        tabTitle[2].onclick = myAudit;
+        tabTitle[3].onclick = myConcern;
+    }();
 
     function dateConvert(date) {
         return date.match(/(\d+-\d+-\d+)/)[0];

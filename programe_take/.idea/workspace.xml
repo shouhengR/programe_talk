@@ -16,197 +16,107 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.853229">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="ArticleDao.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/ArticleDao.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="400">
-                  <caret line="50" column="26" lean-forward="true" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ArticleService.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/Service/ArticleService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="446">
-                  <caret line="59" column="11" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="11" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ArticleServiceImpl.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/ArticleServiceImpl.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="386">
-                  <caret line="272" column="34" lean-forward="true" selection-start-line="272" selection-start-column="34" selection-end-line="272" selection-end-column="34" />
-                  <folding>
-                    <element signature="method#selectByPage#0;class#ArticleServiceImpl#0" />
-                    <element signature="method#selectArticleByTitle#0;class#ArticleServiceImpl#0" />
-                    <element signature="method#selectAllByPage#0;class#ArticleServiceImpl#0" />
-                    <element signature="method#updateHotArticle#0;class#ArticleServiceImpl#0" />
-                    <element signature="method#deleteArticleById#0;class#ArticleServiceImpl#0" />
-                    <element signature="method#updateTopArticle#0;class#ArticleServiceImpl#0" />
-                    <element signature="method#selectNewArticle#0;class#ArticleServiceImpl#0" />
-                    <element signature="method#addArticlePointNumber#0;class#ArticleServiceImpl#0" />
-                    <element signature="method#addArticleBrowseNumber#0;class#ArticleServiceImpl#0" />
-                    <element signature="method#addArticleCommentNumber#0;class#ArticleServiceImpl#0" />
-                    <element signature="method#selectByCategoryId#0;class#ArticleServiceImpl#0" />
-                    <element signature="method#reduceArticleCommentNumber#0;class#ArticleServiceImpl#0" />
-                    <element signature="e#6550#6551#0" expanded="true" />
-                    <element signature="e#6608#6609#0" expanded="true" />
-                    <element signature="e#6682#6683#0" expanded="true" />
-                    <element signature="e#6739#6740#0" expanded="true" />
-                    <element signature="e#6808#6809#0" expanded="true" />
-                    <element signature="e#6835#6836#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="survey_article.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/survey_article.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="552">
-                  <caret line="172" column="47" lean-forward="true" selection-start-line="172" selection-start-column="47" selection-end-line="172" selection-end-column="47" />
-                  <folding>
-                    <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
-                    <element signature="e#4076#4083#1" expanded="true" />
-                    <element signature="e#8501#9373#0" />
-                    <element signature="e#9432#9661#0" />
-                    <element signature="e#9722#9951#0" />
-                    <element signature="e#10013#10232#0" />
-                    <element signature="e#10294#10534#0" />
-                    <element signature="e#10691#11992#0" />
-                    <element signature="e#12080#12226#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/pom.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="414">
-                  <caret line="45" column="28" lean-forward="true" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="user.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/User/user.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="549">
-                  <caret line="962" column="47" selection-start-line="962" selection-start-column="47" selection-end-line="962" selection-end-column="47" />
-                  <folding>
-                    <element signature="n#div#5;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
-                    <element signature="n#div#6;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
-                    <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
-                    <element signature="n#form#1;n#body#0;n#html#0;n#!!top" />
-                    <element signature="n#form#2;n#body#0;n#html#0;n#!!top" />
-                    <element signature="n#form#3;n#body#0;n#html#0;n#!!top" />
-                    <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
-                    <element signature="e#18966#21411#0" />
-                    <element signature="e#20732#21085#0" />
-                    <element signature="e#21572#22925#0" />
-                    <element signature="e#22983#23356#0" />
-                    <element signature="e#23407#23548#0" />
-                    <element signature="e#23707#23996#0" />
-                    <element signature="e#24021#24260#0" />
-                    <element signature="e#24316#28079#0" />
-                    <element signature="e#28133#28388#0" />
-                    <element signature="e#28434#29587#0" />
-                    <element signature="e#29628#30208#0" />
-                    <element signature="e#30278#31358#0" />
-                    <element signature="e#31385#33867#0" />
-                    <element signature="e#33904#35390#0" />
-                    <element signature="n#style#0;n#td#4;n#tr#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#td#5;n#tr#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#i#0;n#a#0;n#td#6;n#tr#0;n#!!top" expanded="true" />
-                    <element signature="e#37488#38604#0" />
-                    <element signature="e#38646#39389#0" />
-                    <element signature="e#39438#41980#0" />
-                    <element signature="e#42178#42430#0" />
-                    <element signature="e#42475#43125#0" />
-                    <element signature="e#43171#43350#0" />
-                    <element signature="e#43396#43596#0" />
-                    <element signature="e#43737#44894#0" />
-                    <element signature="e#44966#45080#0" />
-                    <element signature="e#45175#45269#0" />
-                    <element signature="e#45334#45954#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="article_details.css" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/article_details.css">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="794">
-                  <caret line="98" column="12" lean-forward="true" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="WebMvcAutoConfiguration.java" pinned="false" current-in-tab="false">
-            <entry file="jar://G:/java配置文件/maven/springbootMaven/repository/org/springframework/boot/spring-boot-autoconfigure/2.1.2.RELEASE/spring-boot-autoconfigure-2.1.2.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="667">
-                  <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="article_details.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/article_details.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="469">
-                  <caret line="184" lean-forward="true" selection-start-line="184" selection-end-line="184" />
-                  <folding>
-                    <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
-                    <element signature="n#style#0;n#div#0;n#article#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <element signature="n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ArticleMapper.xml" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/public/mapper/ArticleMapper.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="492">
-                  <caret line="99" column="37" selection-start-line="99" selection-start-column="37" selection-end-line="99" selection-end-column="37" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Article.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/programe_take-base/src/main/java/com/tang/bean/Article.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="782">
-                  <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="User.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/programe_take-base/src/main/java/com/tang/bean/User.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="87">
-                  <caret line="24" column="35" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="35" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="main.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/main.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="713">
+              <caret line="208" column="6" lean-forward="true" selection-start-line="208" selection-start-column="6" selection-end-line="208" selection-end-column="6" />
+              <folding>
+                <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/search/search.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/common.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="89" column="14" selection-start-line="89" selection-start-column="9" selection-end-line="89" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/js/common.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="556">
+              <caret line="176" column="38" lean-forward="true" selection-start-line="176" selection-start-column="38" selection-end-line="176" selection-end-column="38" />
+              <folding>
+                <element signature="n#!!block;n#loginOut#0" />
+                <element signature="e#419#1643#0" />
+                <element signature="e#929#1640#0" />
+                <element signature="n#!!block;n#goBack#0" />
+                <element signature="n#!!block;n#goSearch#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main_nav_1.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/nav/main_nav_1.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#ul#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sendArticle.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/sendArticle.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+              <folding>
+                <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/UserServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/UserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-119">
+              <caret line="34" column="100" selection-start-line="34" selection-start-column="100" selection-end-line="34" selection-end-column="100" />
+              <folding>
+                <element signature="method#getCountByUserName#0;class#UserController#0" />
+                <element signature="method#registerUser#0;class#UserController#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -231,25 +141,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/HotServiceImpl.java" />
-        <option value="$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/StickDao.java" />
-        <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/Service/StickService.java" />
-        <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/StickServiceImpl.java" />
-        <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/Service/CommentService.java" />
-        <option value="$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/CommentDao.java" />
         <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/CommentServiceImpl.java" />
         <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/Service/UserService.java" />
         <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/nav/main_nav.html" />
-        <option value="$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/CategoryDao.java" />
         <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/Service/CategoryService.java" />
         <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/AdminServiceImpl.java" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/Config/App.java" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/CategoryController.java" />
         <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/CategoryServiceImpl.java" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/common.css" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/Backstage/common.css" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/static/js/common.js" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/comment_make.html" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/sum.html" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/hot_recommend.html" />
@@ -259,29 +158,40 @@
         <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/user_make.html" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/self.html" />
         <option value="$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/UserDao.java" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/main.html" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/search_Result.html" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/article_details.html" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/front_end_Development.html" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/game_Development.html" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/AI_Development.html" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/backed_Development.html" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/user_self.html" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/self.css" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/AuditController.java" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/sendArticle.html" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/top_recommend.html" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/nav/container_left.html" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/UserController.java" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/register.html" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/ArticleController.java" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/survey_article.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/article_details.css" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/CategoryDao.java" />
+        <option value="$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/ArticleDao.java" />
         <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/Service/ArticleService.java" />
         <option value="$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/ArticleServiceImpl.java" />
-        <option value="$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/ArticleDao.java" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/ArticleController.java" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/public/mapper/ArticleMapper.xml" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/survey_article.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/nav/main_nav.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/main.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/main.css" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/commonPage.css" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/article_details.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/front_end_Development.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/game_Development.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/backed_Development.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/AI_Development.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/notice.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/Backstage/common.css" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/search_Result.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/user_self.html" />
         <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/User/user.html" />
-        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/article_details.css" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/nav/backstagenav.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/common.css" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/static/js/common.js" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/nav/main_nav_1.html" />
+        <option value="$PROJECT_DIR$/programe_take-web/src/main/resources/templates/sendArticle.html" />
       </list>
     </option>
   </component>
@@ -349,11 +259,11 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="160" />
-    <option name="y" value="35" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="272" />
+    <option name="y" value="33" />
     <option name="width" value="1940" />
-    <option name="height" value="1027" />
+    <option name="height" value="1010" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -362,7 +272,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -378,12 +288,122 @@
             <path>
               <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
               <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-base" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-base" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-base" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-base" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
               <item name="programe_take-dao" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
               <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-dao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-dao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-dao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-dao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
               <item name="programe_take-service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tang" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tang" type="462c0819:PsiDirectoryNode" />
+              <item name="Service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tang" type="462c0819:PsiDirectoryNode" />
+              <item name="ServiceImpl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
@@ -417,6 +437,35 @@
               <item name="programe_take-web" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tang" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tang" type="462c0819:PsiDirectoryNode" />
+              <item name="Config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tang" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -427,6 +476,16 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
@@ -446,6 +505,27 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="Backstage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
@@ -477,11 +557,41 @@
               <item name="Backstage" type="462c0819:PsiDirectoryNode" />
               <item name="User" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="category" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="nav" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="programe_take" type="b2602c69:ProjectViewProjectNode" />
+              <item name="programe_take" type="462c0819:PsiDirectoryNode" />
+              <item name="programe_take-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -500,19 +610,19 @@
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\templates\nav" />
+      <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\static\Image" />
+      <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\static\css" />
+      <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\templates" />
+      <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\static\js" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\static\Image\backImg" />
       <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\static\Image" />
       <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\templates\category" />
       <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources" />
       <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\static\upload" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\static\Image" />
-      <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\static\css" />
-      <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\templates" />
-      <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\static\js" />
-      <recent name="G:\Intell Worker\programe_take\programe_take-web\src\main\resources\templates\Backstage\Admin" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -694,12 +804,17 @@
       <workItem from="1551351856400" duration="7596000" />
       <workItem from="1551414466836" duration="12883000" />
       <workItem from="1551434571867" duration="8564000" />
-      <workItem from="1551578226789" duration="7070000" />
+      <workItem from="1551578226789" duration="9164000" />
+      <workItem from="1551621098555" duration="1867000" />
+      <workItem from="1551660603562" duration="1288000" />
+      <workItem from="1551674246403" duration="3232000" />
+      <workItem from="1551687909827" duration="2627000" />
+      <workItem from="1551696059358" duration="5965000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="464021000" />
+    <option name="totallyTimeSpent" value="481094000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -712,6 +827,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.1696905" side_tool="true" weight="0.58416945" />
@@ -719,7 +835,6 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.20437567" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -731,12 +846,12 @@
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" weight="0.32949308" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Run Dashboard" order="7" sideWeight="0.8303095" weight="0.29944134" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32960895" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="7" sideWeight="0.8303095" visible="true" weight="0.2" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.24134079" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.1560758" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.32998884" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32960895" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12700106" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32960895" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19370331" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="2" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -745,6 +860,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.20437567" />
       <window_info anchor="bottom" id="Find" order="1" />
     </layout>
     <layout-to-restore>
@@ -753,25 +869,25 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.32998884" />
       <window_info id="Image Layers" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2664437" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.1560758" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32998884" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32960895" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.1696905" side_tool="true" weight="0.58416945" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.16833891" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.16833891" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32949308" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.20490928" />
-      <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.32949308" />
-      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="13" show_stripe_button="false" />
-      <window_info anchor="right" id="Maven Projects" order="5" weight="0.11366062" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16542156" />
-      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.20437567" />
+      <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32949308" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.24134079" />
+      <window_info anchor="right" id="Maven Projects" order="6" weight="0.098719314" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17449306" />
+      <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
@@ -780,7 +896,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Bean Validation" order="9" />
-      <window_info active="true" anchor="bottom" id="Run Dashboard" order="14" sideWeight="0.8303095" visible="true" weight="0.21850613" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="14" sideWeight="0.8303095" visible="true" weight="0.2860335" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -817,114 +933,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="30" />
+      <option name="time" value="31" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/CommentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="762">
-          <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
-          <folding>
-            <element signature="method#addComment#0;class#CommentController#0" />
-            <element signature="method#repeatComment#0;class#CommentController#0" />
-            <element signature="method#selectUserComment#0;class#CommentController#0" />
-            <element signature="e#2839#2840#0" expanded="true" />
-            <element signature="e#2901#2902#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-base/src/main/java/com/tang/bean/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/js/echarts.min.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/CategoryDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/AdminServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/Config/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="67" column="18" lean-forward="true" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/nav/main_nav.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="55" column="30" lean-forward="true" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/CategoryController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/Service/CategoryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="11" column="32" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/common.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/Backstage/common.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="31" column="1" lean-forward="true" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/js/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/CategoryServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/admin_index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/admin_notice.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="17" column="47" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/comment_make.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -943,9 +955,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-133">
           <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-          <folding>
-            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -977,66 +986,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/search_Result.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1435">
-          <caret line="90" column="70" lean-forward="true" selection-start-line="90" selection-start-column="70" selection-end-line="90" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/game_Development.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/front_end_Development.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="56" column="47" lean-forward="true" selection-start-line="56" selection-start-column="47" selection-end-line="56" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/AI_Development.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-base/src/main/java/com/tang/bean/Article.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-base/src/main/java/com/tang/bean/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="24" column="35" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/backed_Development.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="246" column="46" lean-forward="true" selection-start-line="246" selection-start-column="46" selection-end-line="246" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/sendArticle.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="134" column="31" selection-start-line="134" selection-start-column="31" selection-end-line="134" selection-end-column="31" />
-          <folding>
-            <element signature="e#4234#5504#0" />
-            <element signature="e#5568#6863#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/self.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="446">
@@ -1065,128 +1014,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/user_self.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="54" column="87" selection-start-line="54" selection-start-column="87" selection-end-line="54" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="310" column="35" selection-start-line="310" selection-start-column="35" selection-end-line="310" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#ul#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#i#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#i#0;n#a#0;n#div#0;n#fieldset#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#2;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#3;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#li#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="43" column="35" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
           <caret line="79" column="71" selection-start-line="79" selection-start-column="71" selection-end-line="79" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/ArticleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="293" column="59" selection-start-line="293" selection-start-column="59" selection-end-line="293" selection-end-column="59" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1044#1045#0" expanded="true" />
-            <element signature="e#1104#1105#0" expanded="true" />
-            <element signature="method#addArticle#0;class#ArticleController#0" />
-            <element signature="method#selectNewArticleByPage#0;class#ArticleController#0" />
-            <element signature="method#selectAllByPage#0;class#ArticleController#0" />
-            <element signature="method#selectAllByPage#1;class#ArticleController#0" />
-            <element signature="method#selectAllByTitle#0;class#ArticleController#0" />
-            <element signature="method#selectAllByTitleNav#0;class#ArticleController#0" />
-            <element signature="method#selectAllByTitle#1;class#ArticleController#0" />
-            <element signature="method#updateHotArticle#0;class#ArticleController#0" />
-            <element signature="method#updateTopArticle#0;class#ArticleController#0" />
-            <element signature="method#delArticle#0;class#ArticleController#0" />
-            <element signature="method#userDelArticleById#0;class#ArticleController#0" />
-            <element signature="method#selectArticleByTitle#0;class#ArticleController#0" />
-            <element signature="method#addArticlePointNumber#0;class#ArticleController#0" />
-            <element signature="method#articleDetails#0;class#ArticleController#0" />
-            <element signature="method#selectByCategoryId#0;class#ArticleController#0" />
-            <element signature="method#selectArticleByUid#0;class#ArticleController#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/Service/ArticleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="59" column="11" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/ArticleServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="272" column="34" lean-forward="true" selection-start-line="272" selection-start-column="34" selection-end-line="272" selection-end-column="34" />
-          <folding>
-            <element signature="method#selectByPage#0;class#ArticleServiceImpl#0" />
-            <element signature="method#selectArticleByTitle#0;class#ArticleServiceImpl#0" />
-            <element signature="method#selectAllByPage#0;class#ArticleServiceImpl#0" />
-            <element signature="method#updateHotArticle#0;class#ArticleServiceImpl#0" />
-            <element signature="method#deleteArticleById#0;class#ArticleServiceImpl#0" />
-            <element signature="method#updateTopArticle#0;class#ArticleServiceImpl#0" />
-            <element signature="method#selectNewArticle#0;class#ArticleServiceImpl#0" />
-            <element signature="method#addArticlePointNumber#0;class#ArticleServiceImpl#0" />
-            <element signature="method#addArticleBrowseNumber#0;class#ArticleServiceImpl#0" />
-            <element signature="method#addArticleCommentNumber#0;class#ArticleServiceImpl#0" />
-            <element signature="method#selectByCategoryId#0;class#ArticleServiceImpl#0" />
-            <element signature="method#reduceArticleCommentNumber#0;class#ArticleServiceImpl#0" />
-            <element signature="e#6550#6551#0" expanded="true" />
-            <element signature="e#6608#6609#0" expanded="true" />
-            <element signature="e#6682#6683#0" expanded="true" />
-            <element signature="e#6739#6740#0" expanded="true" />
-            <element signature="e#6808#6809#0" expanded="true" />
-            <element signature="e#6835#6836#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/ArticleDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="50" column="26" lean-forward="true" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/public/mapper/ArticleMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="99" column="37" selection-start-line="99" selection-start-column="37" selection-end-line="99" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -1202,72 +1033,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="jar://G:/java配置文件/maven/springbootMaven/repository/org/springframework/boot/spring-boot-autoconfigure/2.1.2.RELEASE/spring-boot-autoconfigure-2.1.2.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="45" column="28" lean-forward="true" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/survey_article.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="172" column="47" lean-forward="true" selection-start-line="172" selection-start-column="47" selection-end-line="172" selection-end-column="47" />
-          <folding>
-            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
-            <element signature="e#4076#4083#1" expanded="true" />
-            <element signature="e#8501#9373#0" />
-            <element signature="e#9432#9661#0" />
-            <element signature="e#9722#9951#0" />
-            <element signature="e#10013#10232#0" />
-            <element signature="e#10294#10534#0" />
-            <element signature="e#10691#11992#0" />
-            <element signature="e#12080#12226#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/User/user.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="962" column="47" selection-start-line="962" selection-start-column="47" selection-end-line="962" selection-end-column="47" />
-          <folding>
-            <element signature="n#div#5;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#6;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#form#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#form#2;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#form#3;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
-            <element signature="e#18966#21411#0" />
-            <element signature="e#20732#21085#0" />
-            <element signature="e#21572#22925#0" />
-            <element signature="e#22983#23356#0" />
-            <element signature="e#23407#23548#0" />
-            <element signature="e#23707#23996#0" />
-            <element signature="e#24021#24260#0" />
-            <element signature="e#24316#28079#0" />
-            <element signature="e#28133#28388#0" />
-            <element signature="e#28434#29587#0" />
-            <element signature="e#29628#30208#0" />
-            <element signature="e#30278#31358#0" />
-            <element signature="e#31385#33867#0" />
-            <element signature="e#33904#35390#0" />
-            <element signature="n#style#0;n#td#4;n#tr#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#5;n#tr#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#a#0;n#td#6;n#tr#0;n#!!top" expanded="true" />
-            <element signature="e#37488#38604#0" />
-            <element signature="e#38646#39389#0" />
-            <element signature="e#39438#41980#0" />
-            <element signature="e#42178#42430#0" />
-            <element signature="e#42475#43125#0" />
-            <element signature="e#43171#43350#0" />
-            <element signature="e#43396#43596#0" />
-            <element signature="e#43737#44894#0" />
-            <element signature="e#44966#45080#0" />
-            <element signature="e#45175#45269#0" />
-            <element signature="e#45334#45954#0" />
-          </folding>
+        <state relative-caret-position="667">
+          <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
         </state>
       </provider>
     </entry>
@@ -1278,21 +1047,329 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://G:/java配置文件/maven/springbootMaven/repository/org/springframework/boot/spring-boot-autoconfigure/2.1.2.RELEASE/spring-boot-autoconfigure-2.1.2.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
+        <state relative-caret-position="414">
+          <caret line="45" column="28" lean-forward="true" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/Admin/survey_article.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="173" column="95" lean-forward="true" selection-start-line="173" selection-start-column="95" selection-end-line="173" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-base/src/main/java/com/tang/bean/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="805">
+          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-base/src/main/java/com/tang/bean/Article.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" selection-start-column="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/ArticleServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="259" lean-forward="true" selection-start-line="259" selection-end-line="259" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/ArticleController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="343" column="17" selection-start-line="343" selection-start-column="17" selection-end-line="343" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/public/mapper/ArticleMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="55" column="13" lean-forward="true" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
+          <folding>
+            <element signature="n#resultMap#0;n#mapper#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/Service/ArticleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="62" column="65" selection-start-line="62" selection-start-column="65" selection-end-line="62" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/ArticleDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="92" column="14" selection-start-line="92" selection-start-column="14" selection-end-line="92" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-dao/src/main/java/com/tang/Dao/CategoryDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="21" selection-start-column="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/Config/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1196">
+          <caret line="67" column="18" lean-forward="true" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/nav/main_nav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="828">
+          <caret line="36" column="6" lean-forward="true" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4462">
+          <caret line="194" column="13" selection-start-line="194" selection-start-column="13" selection-end-line="194" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/commonPage.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="52" column="25" lean-forward="true" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/commonPage.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/front_end_Development.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="267" column="64" lean-forward="true" selection-start-line="267" selection-start-column="64" selection-end-line="267" selection-end-column="64" />
+          <folding>
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#5244#5762#0" />
+            <element signature="e#5893#6133#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/game_Development.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="268" column="72" lean-forward="true" selection-start-line="268" selection-start-column="72" selection-end-line="268" selection-end-column="72" />
+          <folding>
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#4252#4770#0" />
+            <element signature="e#4776#4788#0" />
+            <element signature="e#5048#5074#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/backed_Development.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="268" column="64" lean-forward="true" selection-start-line="268" selection-start-column="64" selection-end-line="268" selection-end-column="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/article_details.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="184" lean-forward="true" selection-start-line="184" selection-end-line="184" />
+        <state relative-caret-position="-3241">
+          <caret line="136" column="44" lean-forward="true" selection-start-line="136" selection-start-column="44" selection-end-line="136" selection-end-column="44" />
           <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/category/AI_Development.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="266" column="40" lean-forward="true" selection-start-line="266" selection-start-column="40" selection-end-line="266" selection-end-column="40" />
+          <folding>
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/notice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="28" column="16" lean-forward="true" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/search_Result.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="26" column="67" selection-start-line="26" selection-start-column="67" selection-end-line="26" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/user_self.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+          <folding>
+            <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/Backstage/common.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="20" column="28" lean-forward="true" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-service/src/main/java/com/tang/ServiceImpl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/nav/backstagenav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="75" selection-start-line="9" selection-start-column="75" selection-end-line="9" selection-end-column="75" />
+          <folding>
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/Backstage/User/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2582">
+          <caret line="475" lean-forward="true" selection-start-line="475" selection-end-line="475" />
+          <folding>
+            <element signature="n#ul#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#3;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#4;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#5;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#6;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#form#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#form#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#form#3;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#18966#21411#0" />
+            <element signature="e#19859#20003#0" />
+            <element signature="e#20155#20305#0" />
+            <element signature="e#20732#21085#0" />
+            <element signature="e#21153#21402#0" />
+            <element signature="e#35442#37553#0" />
+            <element signature="e#37598#38714#0" />
+            <element signature="e#38756#39499#0" />
+            <element signature="e#39548#42090#0" />
+            <element signature="e#42160#42196#0" />
+            <element signature="e#42288#42540#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/java/com/tang/web/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-119">
+          <caret line="34" column="100" selection-start-line="34" selection-start-column="100" selection-end-line="34" selection-end-column="100" />
+          <folding>
+            <element signature="method#getCountByUserName#0;class#UserController#0" />
+            <element signature="method#registerUser#0;class#UserController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/search/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/sendArticle.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+          <folding>
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/css/common.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="89" column="14" selection-start-line="89" selection-start-column="9" selection-end-line="89" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/static/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="556">
+          <caret line="176" column="38" lean-forward="true" selection-start-line="176" selection-start-column="38" selection-end-line="176" selection-end-column="38" />
+          <folding>
+            <element signature="n#!!block;n#loginOut#0" />
+            <element signature="e#419#1643#0" />
+            <element signature="e#929#1640#0" />
+            <element signature="n#!!block;n#goBack#0" />
+            <element signature="n#!!block;n#goSearch#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/nav/main_nav_1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#div#0;n#article#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programe_take-web/src/main/resources/templates/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="713">
+          <caret line="208" column="6" lean-forward="true" selection-start-line="208" selection-start-column="6" selection-end-line="208" selection-end-column="6" />
+          <folding>
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>

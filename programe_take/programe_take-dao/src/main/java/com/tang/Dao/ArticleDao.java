@@ -90,6 +90,10 @@ public interface ArticleDao {
 //   前端开发页面的数据源---》 根据类型进行查询
     public List<Article> selectByCategoryId(Integer cid);
 
+//    分类中的模糊查询
+    public List<Article> selectByCategoryIdAndTitle(@Param("cid")Integer cid,
+                                                    @Param("title") String title);
+
     @MapKey("id")
     public Map<Integer,Article> selectAllByTitleNav(@Param("title") String title);
 

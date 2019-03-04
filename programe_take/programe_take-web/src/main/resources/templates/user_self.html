@@ -16,11 +16,22 @@
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <script th:src="@{/js/common.js}"></script>
 
+    <style>
+        #main_nav_two{
+            border-bottom: 1px solid #3333331f;
+        }
+        #main_nav_two li a:hover{
+            color: #00F7DE;
+        }
+    </style>
+
 </head>
 
 <body>
     <!-- 导航栏 -->
-    <div th:replace="~{/nav/main_nav :: main_nav (current='backend-dev')}"></div>
+    <!--<div th:replace="~{/nav/main_nav :: main_nav (current='backend-dev')}"></div>-->
+    <div th:replace="~{/nav/main_nav_1 :: main_nav_one}"></div>
+    <div th:replace="~{/nav/main_nav_1 :: main_nav_two (current='11')}"></div>
     <!-- 整个内容区 -->
     <div class="layui-container" style="width:1200px;">
         <div class="layui-row layui-col-space10">

@@ -4,6 +4,7 @@ import com.tang.bean.Article;
 import com.tang.bean.Comment;
 import com.tang.bean.PageBean;
 import com.tang.bean.ResultBean;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -58,4 +59,6 @@ public interface ArticleService {
     public List<Article> selectArticleByUid(Integer uid);
 
     public Article adminArticleDetails(Integer aid);
+
+    public List<Article> selectByCategoryIdAndTitle(Integer cid, String title);
 }
